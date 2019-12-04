@@ -15,10 +15,11 @@ import java.util.Scanner;
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
 
     private HashMap<Integer, Artikel> artikelen;
-    private static final String FILE_PATH = "C:\\Users\\pimdh\\Documents\\Semester_1_2020\\1_OO Ontwerpen (6)\\Group Werk\\KassaSysteem\\src\\bestanden\\artikel.txt";
+    private static final String FILE_PATH = "src\\bestanden\\artikel.txt";
 
     public ArtikelTekstLoadSave() {
         artikelen = new HashMap();
+        this.load(FILE_PATH);
     }
 
     @Override
@@ -81,5 +82,10 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Artikel getArtikel(int getal){
+        if(getal < 1 || getal > artikelen.size()) throw new DBException("niet bestaande code");
+        return artikelen.get(getal);
     }
 }
