@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ProductOverviewPane extends GridPane {
 	private TableView table;
 	private ArtikelTekstLoadSave artikelen;
-	private static final String FILE_PATH = "C:\\Users\\pimdh\\Documents\\Semester_1_2020\\1_OO Ontwerpen (6)\\Group Werk\\KassaSysteem\\src\\bestanden\\artikel.txt";
+	private static final String FILE_PATH = "src\\bestanden\\artikel.txt";
 
 
 	public ProductOverviewPane() {
