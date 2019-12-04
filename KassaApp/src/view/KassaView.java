@@ -10,7 +10,7 @@ import java.io.File;
 
 public class KassaView {
 	private Stage stage = new Stage();
-	private static final String CSS_STYLESHEET = "application.css";
+	private static final String CSS_STYLESHEET = "src\\application\\application.css";
 		
 	public KassaView(){			
 		stage.setTitle("KASSA VIEW");
@@ -20,7 +20,7 @@ public class KassaView {
 		Group root = new Group();
 		Scene scene = new Scene(root, 750, 500);
 
-		scene.getStylesheets().add(getClass().getResource(CSS_STYLESHEET).toExternalForm()); // Add css sheet
+		//scene.getStylesheets().add(getClass().getResource(CSS_STYLESHEET).toExternalForm()); // Add css sheet
 		BorderPane borderPane = new KassaMainPane();
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
