@@ -4,13 +4,15 @@ package view;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import view.panels.KassaTabPane;
 import view.panels.ProductOverviewPane;
 
 public class KassaMainPane extends BorderPane {
 	public KassaMainPane(){
 		
-	    TabPane tabPane = new TabPane(); 	    
-        Tab kassaTab = new Tab("Kassa");
+	    TabPane tabPane = new TabPane();
+        KassaTabPane kassaTabPane = new KassaTabPane();
+        Tab kassaTab = new Tab("Kassa", kassaTabPane);
         ProductOverviewPane productOverviewPane = new ProductOverviewPane();
         Tab artikelTab = new Tab("Artikelen",productOverviewPane);
         Tab instellingTab = new Tab("Instellingen");
