@@ -39,6 +39,14 @@ public class Artikel {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artikel artikel = (Artikel) o;
+        return artikelCode == artikel.artikelCode;
+    }
+
+    @Override
     public String toString() {
         return "Artikel{" +
                 "artikelCode=" + artikelCode +

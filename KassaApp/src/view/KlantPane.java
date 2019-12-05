@@ -1,17 +1,14 @@
 package view;
 
-import controller.KassaTabController;
 import controller.KlantController;
-import database.ArtikelTekstLoadSave;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
 import model.Bestelling;
-import view.panels.KassaTabPane;
 
-import javax.swing.text.TabableView;
+import java.util.List;
 
 public class KlantPane extends GridPane {
     private TableView table;
@@ -47,8 +44,11 @@ public class KlantPane extends GridPane {
         this.add(totaal,0,11,2,1);
     }
 
-    public void voegArtikelToe(Artikel a){
-        table.getItems().add(a);
+    public void updateArtikelList(List<Artikel> artikels){
+        table.getItems().clear();
+        for(Artikel a: artikels){
+            table.getItems().add(a);
+        }
     }
 
     public void setTotaal(String string){

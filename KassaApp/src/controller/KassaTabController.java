@@ -20,10 +20,10 @@ public class KassaTabController {
         this.kassaTabPane = kassaTabPane;
     }
 
-    public void getArtikel(){
+    public void addArtikel(){
         try{
             Artikel a = artikelen.getArtikel(kassaTabPane.getTextField());
-            bestelling.setTotaal(a.getPrijs());
+            bestelling.addTotaal(a.getPrijs());
             bestelling.voegArtikelToe(a);
 
             kassaTabPane.voegArtikelToe(a);
@@ -32,7 +32,24 @@ public class KassaTabController {
         catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("niet bestaande code");
+            alert.setHeaderText("Niet bestaande code");
+            alert.showAndWait();
+        }
+    }
+
+    public void removeArtikel(){
+        try{
+            Artikel a = artikelen.getArtikel(kassaTabPane.getTextField());
+            bestelling.removeTotaal(a.getPrijs());
+            bestelling.verwijderArtikel(a);
+
+            kassaTabPane.verwijderArtikel(a);
+            kassaTabPane.setTotaal("Totaal: " + bestelling.getTotaal());
+        }
+        catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Artikel kan niet verwijderd worden");
             alert.showAndWait();
         }
     }

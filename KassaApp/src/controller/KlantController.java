@@ -1,10 +1,8 @@
 package controller;
 
-import model.Artikel;
 import model.Bestelling;
 import view.KlantPane;
 import model.Observer;
-import model.Subject;
 
 public class KlantController implements Observer {
     private KlantPane klantPane;
@@ -21,7 +19,7 @@ public class KlantController implements Observer {
 
     @Override
     public void update() {
-        klantPane.voegArtikelToe(bestelling.getLaatsteArtikel());
+        klantPane.updateArtikelList(bestelling.getArtikels());
         klantPane.setTotaal("Totaal: " + bestelling.getTotaal());
     }
 }

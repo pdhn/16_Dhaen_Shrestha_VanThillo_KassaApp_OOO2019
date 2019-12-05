@@ -15,7 +15,7 @@ public class KassaTabPane extends GridPane {
     private VBox vBox;
     private TableView table;
     private TextField textField;
-    private Button button;
+    private Button addButton, removeButton;
     private Label totaal;
 
     public KassaTabPane(KassaTabController kassaTabController){
@@ -28,11 +28,16 @@ public class KassaTabPane extends GridPane {
         textField = new TextField();
         this.add(textField,1,0,1,1);
 
-        button = new Button("OK");
         this.kassaTabController =  kassaTabController;
         kassaTabController.setView(this);
-        button.setOnAction(event -> kassaTabController.getArtikel());
-        this.add(button,2,0,1,1);
+
+        addButton = new Button("Voeg Toe");
+        addButton.setOnAction(event -> kassaTabController.addArtikel());
+        removeButton = new Button("Verwijder");
+        removeButton.setOnAction(event -> kassaTabController.removeArtikel());
+
+        this.add(addButton,2,0,1,1);
+        this.add(removeButton, 3,0,1,1);
 
         TableColumn<String, Artikel> column1 = new TableColumn<>("Omschrijving");
         column1.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
@@ -61,6 +66,8 @@ public class KassaTabPane extends GridPane {
     public void voegArtikelToe(Artikel a){
         table.getItems().add(a);
     }
+
+    public void verwijderArtikel(Artikel a) { table.getItems().remove(a);}
 
     public void setTotaal(String string){
         totaal.setText(string);

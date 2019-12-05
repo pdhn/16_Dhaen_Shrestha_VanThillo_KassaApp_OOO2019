@@ -22,17 +22,28 @@ public class Bestelling implements Subject {
         notifyObservers();
     }
 
+    public void verwijderArtikel(Artikel a){
+        if(!artikels.contains(a)) throw new ModelException("Artikel kan niet verwijderd worden");
+        artikels.remove(a);
+        notifyObservers();
+    }
+
+    public Artikel getLaatsteArtikel() {
+        return this.laatsteArtikel;
+    }
+
     public List<Artikel> getArtikels(){
         return this.artikels;
     }
 
-    public Artikel getLaatsteArtikel(){
-        return this.laatsteArtikel;
-    }
-
-    public void setTotaal(double prijs){
+    public void addTotaal(double prijs){
         if(prijs < 0 ) throw new ModelException("Geen geldige prijs");
         totaal += prijs;
+    }
+
+    public void removeTotaal(double prijs){
+        if(prijs > totaal) throw new ModelException("Prijs mag niet groter zijn dan totaal");
+        totaal -= prijs;
     }
 
     public double getTotaal(){
