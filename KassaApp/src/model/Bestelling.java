@@ -6,7 +6,6 @@ import java.util.List;
 public class Bestelling implements Subject {
     private List<Artikel> artikels;
     private double totaal;
-    private Artikel laatsteArtikel;
     private List<Observer> observers;
 
     public Bestelling(){
@@ -25,7 +24,6 @@ public class Bestelling implements Subject {
             }
         }
         else artikels.add(a);
-        laatsteArtikel = a;
         notifyObservers();
     }
 
@@ -44,13 +42,13 @@ public class Bestelling implements Subject {
         notifyObservers();
     }
 
-    public Artikel getLaatsteArtikel() {
-        return this.laatsteArtikel;
-    }
-
     public List<Artikel> getArtikels(){
         return this.artikels;
     }
+
+    public void setArtikels(List<Artikel> artikels){ this.artikels = artikels;}
+
+    public void setTotaal(double totaal) { this.totaal = totaal;}
 
     public void addTotaal(double prijs){
         if(prijs < 0 ) throw new ModelException("Geen geldige prijs");

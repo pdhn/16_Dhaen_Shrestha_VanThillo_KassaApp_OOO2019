@@ -9,13 +9,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
 
+import java.util.List;
+
 
 public class KassaTabPane extends GridPane {
     private KassaTabController kassaTabController;
     private VBox vBox;
     private TableView table;
     private TextField textField;
-    private Button addButton, removeButton;
+    private Button addButton, removeButton, onHoldButton, offHoldButton;
     private Label totaal;
 
     public KassaTabPane(KassaTabController kassaTabController){
@@ -35,9 +37,15 @@ public class KassaTabPane extends GridPane {
         addButton.setOnAction(event -> kassaTabController.addArtikel());
         removeButton = new Button("Verwijder");
         removeButton.setOnAction(event -> kassaTabController.removeArtikel());
+        onHoldButton = new Button("On Hold");
+        onHoldButton.setOnAction(event -> kassaTabController.setBestellingOnHold());
+        offHoldButton = new Button("Off Hold");
+        offHoldButton.setOnAction(event -> kassaTabController.setBestellingOffHold());
 
         this.add(addButton,2,0,1,1);
         this.add(removeButton, 3,0,1,1);
+        this.add(onHoldButton,4,0,1,1);
+        this.add(offHoldButton,5,0,1,1);
 
         TableColumn<String, Artikel> column1 = new TableColumn<>("Omschrijving");
         column1.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
@@ -71,5 +79,17 @@ public class KassaTabPane extends GridPane {
 
     public void setTotaal(String string){
         totaal.setText(string);
+    }
+
+    public void setBestellingOnHold(){
+        table.getItems().clear();
+        totaal.setText("Totaal:");
+    }
+
+    public void setBestellingOffHold(List<Artikel> artikels){
+        table.getItems().clear();
+        for(Artikel a: artikels){
+            table.getItems().add(a);
+        }
     }
 }
