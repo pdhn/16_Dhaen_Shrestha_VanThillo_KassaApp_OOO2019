@@ -1,38 +1,31 @@
-package view.panels;
+package view;
 
 import controller.KassaTabController;
+import controller.KlantController;
 import database.ArtikelTekstLoadSave;
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
+import model.Bestelling;
+import view.panels.KassaTabPane;
 
+import javax.swing.text.TabableView;
 
-public class KassaTabPane extends GridPane {
-    private KassaTabController kassaTabController;
-    private VBox vBox;
+public class KlantPane extends GridPane {
     private TableView table;
-    private TextField textField;
-    private Button button;
+    private Label label;
+    private VBox vBox;
     private Label totaal;
+    private KlantController klantController;
 
-    public KassaTabPane(KassaTabController kassaTabController){
-        this.setPadding(new Insets(5, 5, 5, 5));
-        this.setVgap(5);
-        this.setHgap(5);
+    public KlantPane(Bestelling bestelling){
+        klantController = new KlantController(bestelling);
+        klantController.setPane(this);
 
-        this.add(new Label("Artikelcode:"),0,0,1,1);
-
-        textField = new TextField();
-        this.add(textField,1,0,1,1);
-
-        button = new Button("OK");
-        this.kassaTabController =  kassaTabController;
-        kassaTabController.setView(this);
-        button.setOnAction(event -> kassaTabController.getArtikel());
-        this.add(button,2,0,1,1);
+        label = new Label("Artikellijst");
+        this.add(label,0,0,1,1);
 
         TableColumn<String, Artikel> column1 = new TableColumn<>("Omschrijving");
         column1.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
@@ -52,10 +45,6 @@ public class KassaTabPane extends GridPane {
 
         totaal = new Label("Totaal:");
         this.add(totaal,0,11,2,1);
-    }
-
-    public int getTextField(){
-        return Integer.parseInt(textField.getText());
     }
 
     public void voegArtikelToe(Artikel a){

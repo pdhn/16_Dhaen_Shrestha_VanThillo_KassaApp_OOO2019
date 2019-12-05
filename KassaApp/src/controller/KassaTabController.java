@@ -3,24 +3,31 @@ package controller;
 import database.ArtikelTekstLoadSave;
 import javafx.scene.control.Alert;
 import model.Artikel;
+import model.Bestelling;
 import view.panels.KassaTabPane;
 
 public class KassaTabController {
     private KassaTabPane kassaTabPane;
     private ArtikelTekstLoadSave artikelen;
-    private double totaal;
+    private Bestelling bestelling;
 
-    public KassaTabController(KassaTabPane kassaTabPane, ArtikelTekstLoadSave artikelen){
-        this.kassaTabPane = kassaTabPane;
+    public KassaTabController(ArtikelTekstLoadSave artikelen, Bestelling bestelling){
         this.artikelen = artikelen;
+        this.bestelling = bestelling;
+    }
+
+    public void setView(KassaTabPane kassaTabPane){
+        this.kassaTabPane = kassaTabPane;
     }
 
     public void getArtikel(){
         try{
             Artikel a = artikelen.getArtikel(kassaTabPane.getTextField());
-            totaal += a.getPrijs();
+            bestelling.setTotaal(a.getPrijs());
+            bestelling.voegArtikelToe(a);
+
             kassaTabPane.voegArtikelToe(a);
-            kassaTabPane.setTotaal("Totaal: " + totaal);
+            kassaTabPane.setTotaal("Totaal: " + bestelling.getTotaal());
         }
         catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -29,4 +36,6 @@ public class KassaTabController {
             alert.showAndWait();
         }
     }
+
+
 }

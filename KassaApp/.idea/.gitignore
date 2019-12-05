@@ -91,3 +91,6 @@ fabric.properties
 .idea/
 
 shop.txt
+
+# Default ignored files
+/workspace.xml
