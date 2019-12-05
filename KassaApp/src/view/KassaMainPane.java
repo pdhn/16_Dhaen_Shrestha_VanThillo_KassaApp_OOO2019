@@ -8,6 +8,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import model.Bestelling;
+import view.panels.InstellingenPane;
 import view.panels.KassaTabPane;
 import view.panels.ProductOverviewPane;
 
@@ -24,7 +25,8 @@ public class KassaMainPane extends BorderPane {
         GridPane productOverviewPane = new ProductOverviewPane();
         Tab artikelTab = new Tab("Artikelen",productOverviewPane);
 
-        Tab instellingTab = new Tab("Instellingen");
+        GridPane instellingenPane = new InstellingenPane();
+        Tab instellingTab = new Tab("Instellingen", instellingenPane);
         Tab logTab = new Tab("Log");
 
         tabPane.getTabs().add(kassaTab);

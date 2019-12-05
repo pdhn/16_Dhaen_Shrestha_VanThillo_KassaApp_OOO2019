@@ -24,7 +24,6 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
 
     @Override
     public ArrayList<Artikel> load(String tekstBestand) {
-        String bestandAlsTekst;
 
         try {
             Scanner scannerForLines = new Scanner(new File(tekstBestand));
