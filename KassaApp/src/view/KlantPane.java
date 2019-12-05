@@ -27,13 +27,17 @@ public class KlantPane extends GridPane {
         TableColumn<String, Artikel> column1 = new TableColumn<>("Omschrijving");
         column1.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
 
-        TableColumn<String, Artikel> column2 = new TableColumn<>("Prijs");
-        column2.setCellValueFactory(new PropertyValueFactory<>("prijs"));
+        TableColumn<String, Artikel> column2 = new TableColumn<>("Aantal");
+        column2.setCellValueFactory(new PropertyValueFactory<>("aantal"));
+
+        TableColumn<String, Artikel> column3 = new TableColumn<>("Prijs");
+        column3.setCellValueFactory(new PropertyValueFactory<>("prijs"));
 
         table = new TableView();
 
         table.getColumns().add(column1);
         table.getColumns().add(column2);
+        table.getColumns().add(column3);
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 

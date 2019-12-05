@@ -17,14 +17,30 @@ public class Bestelling implements Subject {
 
     public void voegArtikelToe(Artikel a){
         if(a == null) throw new ModelException("Geen geldig artikel");
-        artikels.add(a);
+        if(artikels.contains(a)){
+            for(Artikel artikel: artikels){
+                if(artikel.equals(a)){
+                    artikel.verhoogAantal();
+                }
+            }
+        }
+        else artikels.add(a);
         laatsteArtikel = a;
         notifyObservers();
     }
 
     public void verwijderArtikel(Artikel a){
         if(!artikels.contains(a)) throw new ModelException("Artikel kan niet verwijderd worden");
-        artikels.remove(a);
+        Artikel artikel = null;
+        for(Artikel artikel1: artikels){
+            if(artikel1.equals(a)){
+                artikel = a;
+            }
+        }
+        if(artikel.getAantal() > 1){
+            artikel.verlaagAantal();
+        }
+        else artikels.remove(a);
         notifyObservers();
     }
 

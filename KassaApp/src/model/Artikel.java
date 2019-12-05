@@ -7,6 +7,7 @@ public class Artikel {
     private String artikelGroep;
     private double prijs;
     private int voorraad;
+    private int aantal;
 
 
     public Artikel(int artikelCode, String omschrijving, String artikelGroep, double prijs, int voorraad) {
@@ -15,6 +16,7 @@ public class Artikel {
         this.prijs = prijs;
         this.artikelGroep = artikelGroep;
         this.voorraad = voorraad;
+        this.aantal = 1;
     }
 
 
@@ -37,6 +39,12 @@ public class Artikel {
     public int getVoorraad() {
         return voorraad;
     }
+
+    public void verhoogAantal() { aantal++; }
+
+    public void verlaagAantal() { aantal--; }
+
+    public int getAantal(){ return aantal; }
 
     @Override
     public boolean equals(Object o) {
