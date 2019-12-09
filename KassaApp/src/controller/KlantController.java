@@ -19,7 +19,7 @@ public class KlantController implements Observer {
 
     @Override
     public void update() {
-        klantPane.toonArtikels(winkel.getArtikelsFromBestellingVoorKlant());
+        klantPane.toonArtikels(winkel.getArtikelsFromBestellingForKlant());
         klantPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
     }
 }

@@ -14,27 +14,41 @@ public class Bestelling {
 
     public void voegArtikelToe(Artikel a){
         if(a == null) throw new ModelException("Geen geldig artikel");
-        artikels.add(a);
+        if(artikels.contains(a)){
+            for(Artikel artikel: artikels){
+                if(artikel.equals(a)){
+                    artikel.verhoogAantal();
+                }
+            }
+        }
+        else artikels.add(a);
     }
 
     public void verwijderArtikel(Artikel a){
-        if(!artikels.contains(a) || a == null) throw new ModelException("Artikel kan niet verwijderd worden");
-        artikels.remove(a);
-    }
-
-    public List<Artikel> getArtikels(){
-        return this.artikels;
-    }
-
-    public List<Artikel> getArtikelsForKlant(){
-        List<Artikel> klantArtikels = new ArrayList<>();
-        for(Artikel a : artikels){
-            if(!klantArtikels.contains(a)){
-                klantArtikels.add(a);
+        if(!artikels.contains(a)) throw new ModelException("Artikel kan niet verwijderd worden");
+        Artikel artikel = null;
+        for(Artikel artikel1: artikels){
+            if(artikel1.equals(a)){
+                artikel = a;
             }
         }
-        return klantArtikels;
+        if(artikel.getAantal() > 1){
+            artikel.verlaagAantal();
+        }
+        else artikels.remove(a);
     }
+
+    public List<Artikel> getArtikelsForKassa(){
+        List<Artikel> kassaArtikels = new ArrayList<>();
+        for(Artikel a : artikels){
+            for(int i = 0; i < a.getAantal(); i++){
+                kassaArtikels.add(a);
+            }
+        }
+        return kassaArtikels;
+    }
+
+    public List<Artikel> getArtikelsForKlant(){ return this.artikels; }
 
     public void addTotaal(double prijs){
         if(prijs < 0 ) throw new ModelException("Geen geldige prijs");

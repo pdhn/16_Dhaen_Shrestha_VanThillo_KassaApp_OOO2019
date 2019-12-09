@@ -20,7 +20,7 @@ public class KassaTabController {
         try{
             winkel.addArtikelToBestelling(kassaTabPane.getTextField());
 
-            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingVoorKassa());
+            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
             kassaTabPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
         }
         catch (Exception e) {
@@ -35,7 +35,7 @@ public class KassaTabController {
         try{
             winkel.removeArtikelFromBestelling(kassaTabPane.getTextField());
 
-            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingVoorKassa());
+            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
             kassaTabPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
         }
         catch (Exception e) {
@@ -63,7 +63,7 @@ public class KassaTabController {
         try {
             winkel.setBestellingOffHold();
 
-            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingVoorKassa());
+            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
             kassaTabPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

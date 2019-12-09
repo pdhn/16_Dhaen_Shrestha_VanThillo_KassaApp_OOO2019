@@ -17,8 +17,8 @@ public class KlantPane extends GridPane {
     private Label totaal;
     private KlantController klantController;
 
-    public KlantPane(){
-        klantController = new KlantController();
+    public KlantPane(KlantController klantController){
+        this.klantController = klantController;
         klantController.setPane(this);
 
         label = new Label("Artikellijst");

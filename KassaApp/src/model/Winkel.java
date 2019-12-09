@@ -38,11 +38,11 @@ public class Winkel implements Subject {
         notifyObservers();
     }
 
-    public List<Artikel> getArtikelsFromBestellingVoorKassa(){
-        return bestelling.getArtikels();
+    public List<Artikel> getArtikelsFromBestellingForKassa(){
+        return bestelling.getArtikelsForKassa();
     }
 
-    public List<Artikel> getArtikelsFromBestellingVoorKlant(){
+    public List<Artikel> getArtikelsFromBestellingForKlant(){
         return bestelling.getArtikelsForKlant();
     }
 

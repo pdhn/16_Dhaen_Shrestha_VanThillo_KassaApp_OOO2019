@@ -1,5 +1,6 @@
 package view;
 
+import controller.KlantController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -17,7 +18,8 @@ public class KlantView {
 		Group root = new Group();
 		Scene scene = new Scene(root, 500, 500);
 
-		GridPane gridPane = new KlantPane();
+		KlantController klantController = new KlantController();
+		GridPane gridPane = new KlantPane(klantController);
 		root.getChildren().add(gridPane);
 
 		stage.setScene(scene);
