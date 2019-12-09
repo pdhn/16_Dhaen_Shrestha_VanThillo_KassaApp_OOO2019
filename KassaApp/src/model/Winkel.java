@@ -46,6 +46,8 @@ public class Winkel implements Subject {
         return bestelling.getArtikelsForKlant();
     }
 
+    public List<Artikel> getArtikelsFromDb() { return db.getArtikels(); }
+
     public double getTotaalFromBestelling(){
         return bestelling.getTotaal();
     }

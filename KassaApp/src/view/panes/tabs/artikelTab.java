@@ -1,4 +1,4 @@
-package view.panels;
+package view.panes.tabs;
 
 import database.ArtikelTekstLoadSave;
 import javafx.geometry.Insets;
@@ -13,13 +13,13 @@ import model.Artikel;
 import java.util.ArrayList;
 
 
-public class ProductOverviewPane extends GridPane {
+public class artikelTab extends GridPane {
 	private TableView table;
 	private ArtikelTekstLoadSave artikelen;
 	private static final String FILE_PATH = "src\\bestanden\\artikel.txt";
 
 
-	public ProductOverviewPane() {
+	public artikelTab() {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
@@ -62,18 +62,7 @@ public class ProductOverviewPane extends GridPane {
 		VBox vBox = new VBox(table);
 
 		this.add(vBox, 0, 0);
-		/*
-		tableView.getItems().add(new Person("John", "Doe"));
-		tableView.getItems().add(new Person("Jane", "Deer"));
 
-		VBox vbox = new VBox(tableView);
-
-		Scene scene = new Scene(vbox);
-
-		primaryStage.setScene(scene);
-
-		primaryStage.show();
-		*/
 	}
 	
 	

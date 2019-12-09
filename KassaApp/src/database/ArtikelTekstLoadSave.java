@@ -7,10 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
 
@@ -86,5 +83,9 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     public Artikel getArtikel(int getal){
         if(getal < 1 || getal > artikelen.size()) throw new DBException("niet bestaande code");
         return artikelen.get(getal);
+    }
+
+    public List<Artikel> getArtikels(){
+        return new ArrayList<Artikel>(artikelen.values());
     }
 }

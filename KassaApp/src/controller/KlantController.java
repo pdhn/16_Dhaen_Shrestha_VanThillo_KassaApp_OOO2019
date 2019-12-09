@@ -1,7 +1,7 @@
 package controller;
 
 import model.Winkel;
-import view.KlantPane;
+import view.panes.KlantPane;
 import model.Observer;
 
 public class KlantController implements Observer {

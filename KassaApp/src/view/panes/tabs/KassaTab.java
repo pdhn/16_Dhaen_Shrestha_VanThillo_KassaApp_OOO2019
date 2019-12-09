@@ -1,4 +1,4 @@
-package view.panels;
+package view.panes.tabs;
 
 import controller.KassaTabController;
 import javafx.geometry.Insets;
@@ -11,27 +11,42 @@ import model.Artikel;
 import java.util.List;
 
 
-public class KassaTabPane extends GridPane {
+public class KassaTab extends GridPane {
     private KassaTabController kassaTabController;
     private VBox vBox;
     private TableView table;
     private TextField textField;
     private Button addButton, removeButton, onHoldButton, offHoldButton;
-    private Label totaal;
+    private Label artikelCode,totaal;
 
-    public KassaTabPane(KassaTabController kassaTabController){
+    public KassaTab(KassaTabController kassaTabController){
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
 
-        this.add(new Label("Artikelcode:"),0,0,1,1);
-
-        textField = new TextField();
-        this.add(textField,1,0,1,1);
-
         this.kassaTabController =  kassaTabController;
         kassaTabController.setView(this);
 
+        setLabels();
+        setTextField();
+        setButtons();
+        setTableView();
+    }
+
+    private void setLabels() {
+        artikelCode = new Label("Artikelcode:");
+        this.add(artikelCode,0,0,1,1);
+
+        totaal = new Label("Totaal:");
+        this.add(totaal,0,11,2,1);
+    }
+
+    private void setTextField() {
+        textField = new TextField();
+        this.add(textField,1,0,1,1);
+    }
+
+    private void setButtons() {
         addButton = new Button("Voeg Toe");
         addButton.setOnAction(event -> kassaTabController.addArtikelToBestelling());
         removeButton = new Button("Verwijder");
@@ -45,7 +60,9 @@ public class KassaTabPane extends GridPane {
         this.add(removeButton, 3,0,1,1);
         this.add(onHoldButton,4,0,1,1);
         this.add(offHoldButton,5,0,1,1);
+    }
 
+    private void setTableView() {
         TableColumn<String, Artikel> column1 = new TableColumn<>("Omschrijving");
         column1.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
 
@@ -61,10 +78,8 @@ public class KassaTabPane extends GridPane {
 
         vBox = new VBox(table);
         this.add(vBox, 0, 1,3,10);
-
-        totaal = new Label("Totaal:");
-        this.add(totaal,0,11,2,1);
     }
+
 
     public int getTextField(){
         return Integer.parseInt(textField.getText());

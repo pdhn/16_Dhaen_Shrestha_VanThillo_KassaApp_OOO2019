@@ -2,26 +2,26 @@ package controller;
 
 import javafx.scene.control.Alert;
 import model.Winkel;
-import view.panels.KassaTabPane;
+import view.panes.tabs.KassaTab;
 
 public class KassaTabController {
-    private KassaTabPane kassaTabPane;
+    private KassaTab kassaTab;
     private Winkel winkel;
 
     public KassaTabController(){
         winkel = Winkel.getInstance();
     }
 
-    public void setView(KassaTabPane kassaTabPane){
-        this.kassaTabPane = kassaTabPane;
+    public void setView(KassaTab kassaTab){
+        this.kassaTab = kassaTab;
     }
 
     public void addArtikelToBestelling(){
         try{
-            winkel.addArtikelToBestelling(kassaTabPane.getTextField());
+            winkel.addArtikelToBestelling(kassaTab.getTextField());
 
-            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
-            kassaTabPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
+            kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
+            kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
         }
         catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -33,10 +33,10 @@ public class KassaTabController {
 
     public void removeArtikel(){
         try{
-            winkel.removeArtikelFromBestelling(kassaTabPane.getTextField());
+            winkel.removeArtikelFromBestelling(kassaTab.getTextField());
 
-            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
-            kassaTabPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
+            kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
+            kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
         }
         catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -50,7 +50,7 @@ public class KassaTabController {
         try{
             winkel.setBestellingOnHold();
 
-            kassaTabPane.setBestellingOnHold();
+            kassaTab.setBestellingOnHold();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -63,8 +63,8 @@ public class KassaTabController {
         try {
             winkel.setBestellingOffHold();
 
-            kassaTabPane.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
-            kassaTabPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
+            kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
+            kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

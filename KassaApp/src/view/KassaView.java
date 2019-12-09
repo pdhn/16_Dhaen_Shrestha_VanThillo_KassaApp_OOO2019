@@ -3,11 +3,8 @@ package view;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Bestelling;
-
-import java.io.File;
+import view.panes.KassaMainPane;
 
 public class KassaView {
 	private Stage stage = new Stage();

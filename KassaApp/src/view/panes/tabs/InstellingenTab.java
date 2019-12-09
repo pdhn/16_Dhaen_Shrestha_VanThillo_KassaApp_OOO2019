@@ -1,4 +1,4 @@
-package view.panels;
+package view.panes.tabs;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,10 +7,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 
-public class InstellingenPane extends GridPane {
+public class InstellingenTab extends GridPane {
 
 
-    public InstellingenPane(){
+    public InstellingenTab(){
 
         final ToggleGroup toggleGroup = new ToggleGroup();
 

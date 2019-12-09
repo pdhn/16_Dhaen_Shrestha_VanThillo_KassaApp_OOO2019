@@ -1,4 +1,4 @@
-package view;
+package view.panes;
 
 import controller.KlantController;
 import javafx.scene.control.*;
@@ -6,7 +6,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
-import model.Bestelling;
 
 import java.util.List;
 
@@ -21,9 +20,19 @@ public class KlantPane extends GridPane {
         this.klantController = klantController;
         klantController.setPane(this);
 
+        setLabels();
+        setTableView();
+    }
+
+    private void setLabels() {
         label = new Label("Artikellijst");
         this.add(label,0,0,1,1);
 
+        totaal = new Label("Totaal:");
+        this.add(totaal,0,11,2,1);
+    }
+
+    private void setTableView() {
         TableColumn<String, Artikel> column1 = new TableColumn<>("Omschrijving");
         column1.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
 
@@ -43,9 +52,6 @@ public class KlantPane extends GridPane {
 
         vBox = new VBox(table);
         this.add(vBox, 0, 1,3,10);
-
-        totaal = new Label("Totaal:");
-        this.add(totaal,0,11,2,1);
     }
 
     public void toonArtikels(List<Artikel> artikels){
