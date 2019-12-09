@@ -17,8 +17,8 @@ public class KlantPane extends GridPane {
     private Label totaal;
     private KlantController klantController;
 
-    public KlantPane(Bestelling bestelling){
-        klantController = new KlantController(bestelling);
+    public KlantPane(){
+        klantController = new KlantController();
         klantController.setPane(this);
 
         label = new Label("Artikellijst");
@@ -48,7 +48,7 @@ public class KlantPane extends GridPane {
         this.add(totaal,0,11,2,1);
     }
 
-    public void updateArtikelList(List<Artikel> artikels){
+    public void toonArtikels(List<Artikel> artikels){
         table.getItems().clear();
         for(Artikel a: artikels){
             table.getItems().add(a);

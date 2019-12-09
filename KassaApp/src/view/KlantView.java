@@ -9,7 +9,7 @@ import model.Bestelling;
 public class KlantView {
 	private Stage stage = new Stage();		
 		
-	public KlantView(Bestelling bestelling){
+	public KlantView(){
 		stage.setTitle("KLANT VIEW");
 		stage.setResizable(false);		
 		stage.setX(775);
@@ -17,7 +17,7 @@ public class KlantView {
 		Group root = new Group();
 		Scene scene = new Scene(root, 500, 500);
 
-		GridPane gridPane = new KlantPane(bestelling);
+		GridPane gridPane = new KlantPane();
 		root.getChildren().add(gridPane);
 
 		stage.setScene(scene);

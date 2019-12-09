@@ -13,12 +13,11 @@ import view.panels.KassaTabPane;
 import view.panels.ProductOverviewPane;
 
 public class KassaMainPane extends BorderPane {
-	public KassaMainPane(Bestelling beselling){
+	public KassaMainPane(){
 		
 	    TabPane tabPane = new TabPane();
 
-        ArtikelTekstLoadSave artikelTekstLoadSave = new ArtikelTekstLoadSave();
-        KassaTabController kassaTabController = new KassaTabController(artikelTekstLoadSave,beselling);
+        KassaTabController kassaTabController = new KassaTabController();
         GridPane kassaTabPane = new KassaTabPane(kassaTabController);
         Tab kassaTab = new Tab("Kassa", kassaTabPane);
 

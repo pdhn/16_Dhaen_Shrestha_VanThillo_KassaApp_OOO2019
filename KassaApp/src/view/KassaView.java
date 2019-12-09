@@ -13,7 +13,7 @@ public class KassaView {
 	private Stage stage = new Stage();
 	private static final String CSS_STYLESHEET = "src\\application\\application.css";
 		
-	public KassaView(Bestelling bestelling){
+	public KassaView(){
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);		
 		stage.setX(20);
@@ -22,7 +22,7 @@ public class KassaView {
 		Scene scene = new Scene(root, 750, 500);
 
 		//scene.getStylesheets().add(getClass().getResource(CSS_STYLESHEET).toExternalForm()); // Add css sheet
-		BorderPane borderPane = new KassaMainPane(bestelling);
+		BorderPane borderPane = new KassaMainPane();
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);

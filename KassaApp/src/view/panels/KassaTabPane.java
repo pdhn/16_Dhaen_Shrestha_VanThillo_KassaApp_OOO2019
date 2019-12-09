@@ -1,7 +1,6 @@
 package view.panels;
 
 import controller.KassaTabController;
-import database.ArtikelTekstLoadSave;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,7 +33,7 @@ public class KassaTabPane extends GridPane {
         kassaTabController.setView(this);
 
         addButton = new Button("Voeg Toe");
-        addButton.setOnAction(event -> kassaTabController.addArtikel());
+        addButton.setOnAction(event -> kassaTabController.addArtikelToBestelling());
         removeButton = new Button("Verwijder");
         removeButton.setOnAction(event -> kassaTabController.removeArtikel());
         onHoldButton = new Button("On Hold");
@@ -71,11 +70,12 @@ public class KassaTabPane extends GridPane {
         return Integer.parseInt(textField.getText());
     }
 
-    public void voegArtikelToe(Artikel a){
-        table.getItems().add(a);
+    public void toonArtikels(List<Artikel> artikels){
+        table.getItems().clear();
+        for(Artikel a : artikels){
+            table.getItems().add(a);
+        }
     }
-
-    public void verwijderArtikel(Artikel a) { table.getItems().remove(a);}
 
     public void setTotaal(String string){
         totaal.setText(string);
@@ -84,12 +84,5 @@ public class KassaTabPane extends GridPane {
     public void setBestellingOnHold(){
         table.getItems().clear();
         totaal.setText("Totaal:");
-    }
-
-    public void setBestellingOffHold(List<Artikel> artikels){
-        table.getItems().clear();
-        for(Artikel a: artikels){
-            table.getItems().add(a);
-        }
     }
 }
