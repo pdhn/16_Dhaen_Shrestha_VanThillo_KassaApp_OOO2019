@@ -51,7 +51,7 @@ public class KlantPane extends GridPane {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         vBox = new VBox(table);
-        this.add(vBox, 0, 1,3,10);
+        this.add(vBox, 0, 1,6,10);
     }
 
     public void toonArtikels(List<Artikel> artikels){

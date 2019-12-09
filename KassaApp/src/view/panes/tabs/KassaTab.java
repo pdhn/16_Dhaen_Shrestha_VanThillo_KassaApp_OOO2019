@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import model.Artikel;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public class KassaTab extends GridPane {
@@ -16,7 +17,7 @@ public class KassaTab extends GridPane {
     private VBox vBox;
     private TableView table;
     private TextField textField;
-    private Button addButton, removeButton, onHoldButton, offHoldButton;
+    private Button addButton, onHoldButton, offHoldButton;
     private Label artikelCode,totaal;
 
     public KassaTab(KassaTabController kassaTabController){
@@ -31,6 +32,7 @@ public class KassaTab extends GridPane {
         setTextField();
         setButtons();
         setTableView();
+        setHandlers();
     }
 
     private void setLabels() {
@@ -48,18 +50,12 @@ public class KassaTab extends GridPane {
 
     private void setButtons() {
         addButton = new Button("Voeg Toe");
-        addButton.setOnAction(event -> kassaTabController.addArtikelToBestelling());
-        removeButton = new Button("Verwijder");
-        removeButton.setOnAction(event -> kassaTabController.removeArtikel());
         onHoldButton = new Button("On Hold");
-        onHoldButton.setOnAction(event -> kassaTabController.setBestellingOnHold());
         offHoldButton = new Button("Off Hold");
-        offHoldButton.setOnAction(event -> kassaTabController.setBestellingOffHold());
 
         this.add(addButton,2,0,1,1);
-        this.add(removeButton, 3,0,1,1);
-        this.add(onHoldButton,4,0,1,1);
-        this.add(offHoldButton,5,0,1,1);
+        this.add(onHoldButton,3,0,1,1);
+        this.add(offHoldButton,4,0,1,1);
     }
 
     private void setTableView() {
@@ -77,7 +73,32 @@ public class KassaTab extends GridPane {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         vBox = new VBox(table);
-        this.add(vBox, 0, 1,3,10);
+        this.add(vBox, 0, 1,6,10);
+    }
+
+    private void setHandlers() {
+        addButton.setOnAction(event -> kassaTabController.addArtikelToBestelling());
+        onHoldButton.setOnAction(event -> kassaTabController.setBestellingOnHold());
+        offHoldButton.setOnAction(event -> kassaTabController.setBestellingOffHold());
+
+        table.setRowFactory(ev -> {
+            TableRow<Artikel> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if(event.getClickCount() == 1 && (!row.isEmpty())) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Bevestiging");
+                    alert.setHeaderText("Artikel verwijderen?");
+                    alert.setContentText("Wilt u dit artikel verwijderen?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.isPresent() && result.get() == ButtonType.OK){
+                        int artikelCode = row.getItem().getArtikelCode();
+                        kassaTabController.removeArtikel(artikelCode);
+                    }
+                }
+            });
+            return row;
+        });
     }
 
 

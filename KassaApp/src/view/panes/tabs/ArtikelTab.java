@@ -13,13 +13,13 @@ import model.Artikel;
 import java.util.ArrayList;
 
 
-public class artikelTab extends GridPane {
+public class ArtikelTab extends GridPane {
 	private TableView table;
 	private ArtikelTekstLoadSave artikelen;
 	private static final String FILE_PATH = "src\\bestanden\\artikel.txt";
 
 
-	public artikelTab() {
+	public ArtikelTab() {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);

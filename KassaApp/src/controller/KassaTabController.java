@@ -31,9 +31,9 @@ public class KassaTabController {
         }
     }
 
-    public void removeArtikel(){
+    public void removeArtikel(int code){
         try{
-            winkel.removeArtikelFromBestelling(kassaTab.getTextField());
+            winkel.removeArtikelFromBestelling(code);
 
             kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
             kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
