@@ -69,13 +69,13 @@ public class InstellingenTab extends GridPane {
 
         this.add(confirmBtn, 0, 2);
 
-        korting = new ComboBox(FXCollections.observableArrayList("Geen", "Groep", "Drempel", "Duurste"));
+        korting = new ComboBox(FXCollections.observableArrayList(instellingenTabController.getKortingStrategyList()));
         korting.setValue("Geen");
 
         percentageLabel = new Label("Percentage");
         bedragLabel = new Label("Bedrag");
-        percentageField = new TextField();
-        bedragField = new TextField();
+        percentageField = new TextField("0");
+        bedragField = new TextField("0");
         kortingButton = new Button("Apply");
 
         this.add(korting, 0, 4);
@@ -86,5 +86,36 @@ public class InstellingenTab extends GridPane {
         this.add(kortingButton,0,7);
 
         kortingButton.setOnAction(event -> instellingenTabController.setKorting());
+    }
+
+    public String getKorting(){
+        return korting.getValue().toString();
+    }
+
+    public int getPercentageField() {
+        int percentage = 0;
+        try {
+            percentage = Integer.parseInt(percentageField.getText());
+        } catch (Exception e) {
+            setAlert();
+        }
+        return percentage;
+    }
+
+    public int getBedragField(){
+        int bedrag = 0;
+        try {
+            bedrag = Integer.parseInt(bedragField.getText());
+        } catch (Exception e) {
+            setAlert();
+        }
+        return bedrag;
+    }
+
+    public void setAlert(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Geef een geheel getal in");
+        alert.showAndWait();
     }
 }

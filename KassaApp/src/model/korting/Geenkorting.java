@@ -1,14 +1,11 @@
 package model.korting;
 
 import model.ModelException;
-import model.Winkel;
 
-public class Drempelkorting implements Korting {
-    private Winkel winkel;
+public class Geenkorting implements Korting {
     private int percentage, bedrag;
 
-    public Drempelkorting(){
-        winkel = Winkel.getInstance();
+    public Geenkorting(){
     }
 
     @Override
@@ -25,11 +22,6 @@ public class Drempelkorting implements Korting {
 
     @Override
     public double getKorting() {
-        if(winkel.getTotaalFromBestelling() >= bedrag){
-            return winkel.getTotaalFromBestelling()*this.percentage/100;
-        }
-        else{
-            return 0;
-        }
+        return 0;
     }
 }

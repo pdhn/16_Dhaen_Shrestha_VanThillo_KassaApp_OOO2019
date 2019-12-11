@@ -3,8 +3,10 @@ package model;
 import database.ArtikelExcelLoadSave;
 import database.ArtikelLoadSaveTemplate;
 import database.ArtikelTekstLoadSave;
-import model.korting.GeenKorting;
+import model.korting.Geenkorting;
 import model.korting.Korting;
+import model.korting.KortingEnum;
+import model.korting.KortingFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,7 +28,7 @@ public class Winkel implements Subject {
         bestelling = new Bestelling();
         bestellingOnHold = null;
         observers = new ArrayList<>();
-        korting = new GeenKorting();
+        korting = new Geenkorting();
 
         // --- db reads from excel or txt depending on config.properties file ---
         try (InputStream inputStream = new FileInputStream(FILE_PATH_PROPERTIES)) {
@@ -50,7 +52,10 @@ public class Winkel implements Subject {
         return uniqueInstance;
     }
 
-    public void setKorting(Korting korting){
+    public void setKorting(String type, int percentage, int bedrag){
+        Korting korting = KortingFactory.createKorting(type);
+        korting.setPercentage(percentage);
+        korting.setBedrag(bedrag);
         this.korting = korting;
     }
 
@@ -78,6 +83,14 @@ public class Winkel implements Subject {
 
     public List<Artikel> getArtikelsFromDb() {
         return db.getArtikels();
+    }
+
+    public List<String> getKortingStrategyList(){
+        List<String> list = new ArrayList<>();
+        for(KortingEnum korting: KortingEnum.values()){
+            list.add(korting.toString());
+        }
+        return list;
     }
 
     public double getTotaalFromBestelling() {
