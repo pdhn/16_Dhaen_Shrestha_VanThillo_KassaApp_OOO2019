@@ -1,7 +1,7 @@
 package view.panes.tabs;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import controller.InstellingenTabController;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import model.ModelException;
 
@@ -9,10 +9,17 @@ import java.io.*;
 import java.util.Properties;
 
 public class InstellingenTab extends GridPane {
+    private InstellingenTabController instellingenTabController;
+    private ComboBox korting;
+    private TextField percentageField, bedragField;
+    private Label percentageLabel, bedragLabel;
+    private Button kortingButton;
 
     private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
 
-    public InstellingenTab() {
+    public InstellingenTab(InstellingenTabController instellingenTabController) {
+        this.instellingenTabController = instellingenTabController;
+        instellingenTabController.setView(this);
 
         final ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -61,5 +68,23 @@ public class InstellingenTab extends GridPane {
         });
 
         this.add(confirmBtn, 0, 2);
+
+        korting = new ComboBox(FXCollections.observableArrayList("Geen", "Groep", "Drempel", "Duurste"));
+        korting.setValue("Geen");
+
+        percentageLabel = new Label("Percentage");
+        bedragLabel = new Label("Bedrag");
+        percentageField = new TextField();
+        bedragField = new TextField();
+        kortingButton = new Button("Apply");
+
+        this.add(korting, 0, 4);
+        this.add(percentageLabel,0,5);
+        this.add(bedragLabel,1,5);
+        this.add(percentageField,0,6);
+        this.add(bedragField,1,6);
+        this.add(kortingButton,0,7);
+
+        kortingButton.setOnAction(event -> instellingenTabController.setKorting());
     }
 }

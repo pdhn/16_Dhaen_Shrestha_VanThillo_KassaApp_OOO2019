@@ -3,6 +3,8 @@ package model;
 import database.ArtikelExcelLoadSave;
 import database.ArtikelLoadSaveTemplate;
 import database.ArtikelTekstLoadSave;
+import model.korting.GeenKorting;
+import model.korting.Korting;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,6 +18,7 @@ public class Winkel implements Subject {
     private ArtikelLoadSaveTemplate db;
     private Bestelling bestelling, bestellingOnHold;
     private List<Observer> observers;
+    private Korting korting;
 
     private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
 
@@ -23,6 +26,7 @@ public class Winkel implements Subject {
         bestelling = new Bestelling();
         bestellingOnHold = null;
         observers = new ArrayList<>();
+        korting = new GeenKorting();
 
         // --- db reads from excel or txt depending on config.properties file ---
         try (InputStream inputStream = new FileInputStream(FILE_PATH_PROPERTIES)) {
@@ -44,6 +48,10 @@ public class Winkel implements Subject {
             uniqueInstance = new Winkel();
         }
         return uniqueInstance;
+    }
+
+    public void setKorting(Korting korting){
+        this.korting = korting;
     }
 
     public void addArtikelToBestelling(int artikelCode) {
@@ -75,6 +83,10 @@ public class Winkel implements Subject {
     public double getTotaalFromBestelling() {
         return bestelling.getTotaal();
     }
+
+    public double getKortingForBestelling() { return korting.getKorting(); }
+
+    public double getTotaalMetKorting() { return getTotaalFromBestelling() - getKortingForBestelling();}
 
     public void setBestellingOnHold() {
         if (bestellingOnHold != null) throw new ModelException("Er is al een bestelling on hold");

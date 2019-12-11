@@ -1,6 +1,7 @@
 package view.panes;
 
 
+import controller.InstellingenTabController;
 import controller.KassaTabController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -22,8 +23,10 @@ public class KassaMainPane extends BorderPane {
         GridPane productOverviewPane = new ArtikelTab();
         Tab artikelTab = new Tab("Artikelen",productOverviewPane);
 
-        GridPane instellingenPane = new InstellingenTab();
+        InstellingenTabController instellingenTabController = new InstellingenTabController();
+        GridPane instellingenPane = new InstellingenTab(instellingenTabController);
         Tab instellingTab = new Tab("Instellingen", instellingenPane);
+
         Tab logTab = new Tab("Log");
 
         tabPane.getTabs().add(kassaTab);
