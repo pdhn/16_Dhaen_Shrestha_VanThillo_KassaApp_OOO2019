@@ -8,11 +8,11 @@ import model.ModelException;
 import java.io.*;
 import java.util.Properties;
 
-public class InstellingenPane extends GridPane {
+public class InstellingenTab extends GridPane {
 
     private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
 
-    public InstellingenPane() {
+    public InstellingenTab() {
 
         final ToggleGroup toggleGroup = new ToggleGroup();
 
