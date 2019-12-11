@@ -1,35 +1,33 @@
-package database;
+package database.tests;
 
-import excel.ExcelPlugin;
-import jxl.read.biff.BiffException;
-import model.Artikel;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.IOException;
 
 public class TestArtikelExcelLoadSave {
 
     private static final String FILE_PATH = "src\\bestanden\\artikel.xls";
+    private static final String FILE_PATH_TXT = "src\\bestanden\\artikel.txt";
 
     @Test
     public void testLoad() {
         /*ExcelPlugin excelPlugin = new ExcelPlugin();
 
         try {
-            System.out.println(excelPlugin.read(new File(FILE_PATH)));
+            System.out.println(excelPlugin.read(new File(EXCEL_FILE_PATH)));
         } catch (BiffException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }*/
 
-        ArtikelExcelLoadSave artikel = new ArtikelExcelLoadSave();
+        //ArtikelExcelLoadSave artikel = new ArtikelExcelLoadSave();
 
 
-        for (Artikel a : artikel.load(FILE_PATH)) {
+        /*for (Artikel a : artikel.load(FILE_PATH)) {
             System.out.println(a.toString());
-        }
+        }*/
+        //TekstLoadSave tekstLoadSave = new TekstLoadSave();
+
+        //tekstLoadSave.save(tekstLoadSave.load(FILE_PATH_TXT, "]"), FILE_PATH_TXT, ",");
     }
 
     @Test
@@ -37,15 +35,15 @@ public class TestArtikelExcelLoadSave {
         /*ExcelPlugin excelPlugin = new ExcelPlugin();
 
         try {
-            System.out.println(excelPlugin.read(new File(FILE_PATH)));
+            System.out.println(excelPlugin.read(new File(EXCEL_FILE_PATH)));
         } catch (BiffException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }*/
 
-        ArtikelExcelLoadSave artikel = new ArtikelExcelLoadSave();
+        //ArtikelExcelLoadSave artikel = new ArtikelExcelLoadSave();
 
-        artikel.save(artikel.load(FILE_PATH));
+        //artikel.save(artikel.load(FILE_PATH));
     }
 }

@@ -2,90 +2,74 @@ package database;
 
 import model.Artikel;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
-public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
+import static database.ArrayListConverter.convertToArrayListArtikel;
+
+public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate implements ArtikelLoadSaveTemplate {
 
     private HashMap<Integer, Artikel> artikelen;
-    private static final String FILE_PATH = "src\\bestanden\\artikel.txt";
+
+    protected static final String TXT_FILE_PATH = "src\\bestanden\\artikel.txt";
+    protected static final String DELIMITER = ",";
 
     public ArtikelTekstLoadSave() {
         artikelen = new HashMap();
-        this.load(FILE_PATH);
+        this.load();
     }
 
     @Override
-    public ArrayList<Artikel> load(String tekstBestand) {
-
-        try {
-            Scanner scannerForLines = new Scanner(new File(tekstBestand));
-
-            while (scannerForLines.hasNextLine()) {
-                String currentLine;
-                try { // End of line exception handling
-                    currentLine = scannerForLines.next();
-                } catch (NoSuchElementException e) {
-                    scannerForLines.close();
-                    return new ArrayList<Artikel>(artikelen.values());
-                }
-
-                Scanner scannerForLine = new Scanner(currentLine);
-                scannerForLine.useDelimiter(",");
-
-                int artikelCode = scannerForLine.nextInt();
-                String omschrijving = scannerForLine.next();
-                String artikelGroep = scannerForLine.next();
-                double prijs = scannerForLine.nextDouble();
-                int voorraad = scannerForLine.nextInt();
-
-                Artikel artikel = new Artikel(artikelCode, omschrijving, artikelGroep, prijs, voorraad);
-
-                artikelen.put(artikelCode, artikel);
-
-                scannerForLine.close();
-            }
-
-            scannerForLines.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-
-        return new ArrayList<Artikel>(artikelen.values());
+    public ArrayList<Artikel> load() {
+        return this.load(TXT_FILE_PATH);
     }
 
     @Override
-    public void save(ArrayList<Artikel> bestanden) {
+    public ArrayList<Artikel> load(String naamBestandOfTable) {
+        // Load into HashMap
+        ArrayList<ArrayList<String>> tempEntriesAsString = this.load(naamBestandOfTable, DELIMITER);
 
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(FILE_PATH), "utf-8"))) {
+        return convertToArrayListArtikel(tempEntriesAsString, artikelen);
+    }
 
-            for (Artikel a : bestanden) {
-                writer.write(a.getArtikelCode() + "," + a.getOmschrijving() + ","
-                        + a.getArtikelGroep() + "," + a.getPrijs() + "," + a.getVoorraad() + "\n");
-            }
+    @Override
+    public void save(ArrayList lijstObjecten) {
+        this.save(lijstObjecten, TXT_FILE_PATH);
+    }
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    @Override
+    public void save(ArrayList lijstObjecten, String naamBestandOfTable) {
+        // Convert to list of list of strings to write to file
+        ArrayList<ArrayList<String>> tempReturnEntries = new ArrayList<>();
+
+        for (Artikel a : (ArrayList<Artikel>) lijstObjecten) {
+            ArrayList<String> tempArtikelAsStrings = new ArrayList<>();
+
+            tempArtikelAsStrings.add(String.valueOf(a.getArtikelCode()));
+            tempArtikelAsStrings.add(a.getOmschrijving());
+            tempArtikelAsStrings.add(a.getArtikelGroep());
+            tempArtikelAsStrings.add(String.valueOf(a.getPrijs()));
+            tempArtikelAsStrings.add(String.valueOf(a.getVoorraad()));
+
+            tempReturnEntries.add(tempArtikelAsStrings);
         }
+
+        this.save(tempReturnEntries, naamBestandOfTable, DELIMITER);
     }
 
-    public Artikel getArtikel(int getal){
-        if(getal < 1 || getal > artikelen.size()) throw new DBException("niet bestaande code");
-        return artikelen.get(getal);
+    /**
+     * @param artikelCode Must be larger than 1 and less than amount of articles saved.
+     */
+    public Artikel getArtikel(int artikelCode) {
+        if (artikelCode < 1 || artikelCode > artikelen.size()) throw new DBException("Niet bestaande artikel code.");
+        return artikelen.get(artikelCode);
     }
 
-    public List<Artikel> getArtikels(){
-        return new ArrayList<Artikel>(artikelen.values());
+    /**
+     * @return All articles saved in HashMap.
+     */
+    public List<Artikel> getArtikels() {
+        return new ArrayList<>(artikelen.values());
     }
+
 }

@@ -1,12 +1,16 @@
 package database;
 
-import model.Artikel;
-
 import java.util.ArrayList;
 
-public interface LoadSaveTemplate {
+public interface LoadSaveTemplate<Object> {
 
-    public ArrayList<Artikel> load(String bestand);
+    ArrayList<Object> load();
 
-    public void save(ArrayList<Artikel> bestanden);
+    ArrayList<Object> load(String naamBestandOfTable);
+
+    void save(ArrayList<Object> lijstObjecten);
+
+    void save(ArrayList<Object> lijstObjecten, String naamBestandOfTable);
+
+
 }

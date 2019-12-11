@@ -1,4 +1,5 @@
 package database;
 
-public abstract class ExcelLoadSaveTemplate implements LoadSaveTemplate{
+public abstract class ExcelLoadSaveTemplate implements LoadSaveTemplate {
+
 }
