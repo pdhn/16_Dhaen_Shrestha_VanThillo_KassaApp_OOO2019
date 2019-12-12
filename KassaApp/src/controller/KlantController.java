@@ -17,6 +17,10 @@ public class KlantController implements Observer {
         this.klantPane = klantPane;
     }
 
+    public void setTotaalWithKorting() {
+        klantPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling() + " - Korting: " + winkel.getKortingForBestelling() + " = " + winkel.getTotaalMetKorting());
+    }
+
     @Override
     public void update() {
         klantPane.toonArtikels(winkel.getArtikelsFromBestellingForKlant());

@@ -72,4 +72,8 @@ public class KassaTabController {
             alert.showAndWait();
         }
     }
+
+    public void setTotaalWithKorting() {
+        kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling() + " - Korting: " + winkel.getKortingForBestelling() + " = " + winkel.getTotaalMetKorting());
+    }
 }

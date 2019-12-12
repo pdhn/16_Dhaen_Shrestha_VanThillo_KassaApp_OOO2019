@@ -32,6 +32,6 @@ public class Duurstekorting implements Korting {
                 duurste = a.getPrijs();
             }
         }
-        return duurste*this.percentage/100;
+        return duurste;
     }
 }
