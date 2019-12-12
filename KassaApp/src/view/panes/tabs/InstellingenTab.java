@@ -69,6 +69,7 @@ public class InstellingenTab extends GridPane {
 
         this.add(confirmBtn, 0, 2);
 
+        //Kortingen
         korting = new ComboBox(FXCollections.observableArrayList(instellingenTabController.getKortingStrategyList()));
         korting.setValue("Geen");
 
@@ -86,7 +87,9 @@ public class InstellingenTab extends GridPane {
         this.add(kortingButton,0,7);
 
         kortingButton.setOnAction(event -> instellingenTabController.setKorting());
+
     }
+
 
     public String getKorting(){
         return korting.getValue().toString();

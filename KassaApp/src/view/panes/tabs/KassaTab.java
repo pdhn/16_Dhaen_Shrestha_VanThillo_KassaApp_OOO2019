@@ -17,7 +17,7 @@ public class KassaTab extends GridPane {
     private VBox vBox;
     private TableView table;
     private TextField textField;
-    private Button addButton, onHoldButton, offHoldButton, afsluitButton;
+    private Button addButton, onHoldButton, offHoldButton, afsluitButton, betaaldButton;
     private Label artikelCode,totaal;
 
     public KassaTab(KassaTabController kassaTabController){
@@ -53,6 +53,7 @@ public class KassaTab extends GridPane {
         onHoldButton = new Button("On Hold");
         offHoldButton = new Button("Off Hold");
         afsluitButton = new Button("Sluit af");
+        betaaldButton = new Button("BETAALD");
 
         this.add(addButton,2,0,1,1);
         this.add(onHoldButton,3,0,1,1);
@@ -83,6 +84,7 @@ public class KassaTab extends GridPane {
         onHoldButton.setOnAction(event -> kassaTabController.setBestellingOnHold());
         offHoldButton.setOnAction(event -> kassaTabController.setBestellingOffHold());
         //afsluitButton.setOnAction(event ->);
+        //betaaldButton.setOnAction(event -> );
 
         table.setRowFactory(ev -> {
             TableRow<Artikel> row = new TableRow<>();

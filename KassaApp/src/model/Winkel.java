@@ -115,6 +115,7 @@ public class Winkel implements Subject {
         bestellingOnHold = null;
     }
 
+
     @Override
     public void registerObserver(Observer o) {
         if (o == null) {

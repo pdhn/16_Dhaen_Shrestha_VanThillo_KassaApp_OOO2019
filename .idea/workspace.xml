@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a6b8c72-57dd-420a-b551-eb26a4bb1e14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KassaApp/src/database/tests/TestArtikelExcelLoadSave.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/database/tests/database/tests/TestArtikelExcelLoadSave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/Bestelling.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/Bestelling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/controller/KassaTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/controller/KassaTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/Winkel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/Winkel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/InstellingenTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/InstellingenTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/KassaTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/KassaTab.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1575986390231</updated>
       <workItem from="1575986391589" duration="24000" />
-      <workItem from="1576155421684" duration="3912000" />
+      <workItem from="1576155421684" duration="5287000" />
     </task>
     <servers />
   </component>

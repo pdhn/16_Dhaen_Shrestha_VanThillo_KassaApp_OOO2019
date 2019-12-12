@@ -39,6 +39,12 @@ public class Bestelling {
         else artikels.remove(a);
     }
 
+    public void verwijderAlleArtikels(){
+        for(Artikel artikel : artikels){
+            artikels.remove(artikel);
+        }
+    }
+
     public List<Artikel> getArtikelsForKassa(){
         List<Artikel> kassaArtikels = new ArrayList<>();
         for(Artikel a : artikels){
@@ -66,4 +72,8 @@ public class Bestelling {
     }
 
     public double getTotaalMetBTW(){ return this.totaal + BTW_PERCENTAGE * this.totaal; }
+
+    public void nieuweVerkoop(){
+
+    }
 }

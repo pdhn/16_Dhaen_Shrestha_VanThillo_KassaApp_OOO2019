@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.scene.control.Alert;
+import model.Bestelling;
 import model.Winkel;
 import view.panes.tabs.KassaTab;
 
@@ -74,4 +75,10 @@ public class KassaTabController {
             alert.showAndWait();
         }
     }
+    /**
+    public void nieuweVerkoop(){
+        try {
+        }
+    }
+     **/
 }
