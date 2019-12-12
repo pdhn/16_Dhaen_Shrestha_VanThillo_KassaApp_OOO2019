@@ -6,6 +6,7 @@ import java.util.List;
 public class Bestelling {
     private List<Artikel> artikels;
     private double totaal;
+    private static final double BTW_PERCENTAGE = 0.06;
 
     public Bestelling(){
         artikels = new ArrayList<>();
@@ -63,4 +64,6 @@ public class Bestelling {
     public double getTotaal(){
         return this.totaal;
     }
+
+    public double getTotaalMetBTW(){ return this.totaal + BTW_PERCENTAGE * this.totaal; }
 }

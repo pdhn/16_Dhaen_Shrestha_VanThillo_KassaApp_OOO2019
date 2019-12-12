@@ -63,7 +63,7 @@ public class InstellingenTab extends GridPane {
                 throw new ModelException("Error writing to config file");
             } catch (IOException ex) {
                 ex.printStackTrace();
-                throw new ModelException("Error writing toconfig file");
+                throw new ModelException("Error writing to config file");
             }
         });
 
