@@ -6,24 +6,19 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
-import model.Observer;
-import view.panes.tabs.KassaTab;
 
 import java.util.List;
 
-public class KlantPane extends GridPane implements Observer {
+public class KlantPane extends GridPane {
     private TableView table;
     private Label label;
     private VBox vBox;
     private Label totaal;
     private KlantController klantController;
-    private KassaTab kassaTab;
 
     public KlantPane(KlantController klantController){
         this.klantController = klantController;
         klantController.setPane(this);
-
-        //kassaTab.registerObserver(this);
 
         setLabels();
         setTableView();
@@ -68,10 +63,5 @@ public class KlantPane extends GridPane implements Observer {
 
     public void setTotaal(String string){
         totaal.setText(string);
-    }
-
-    @Override
-    public void update() {
-        klantController.setTotaalWithKorting();
     }
 }

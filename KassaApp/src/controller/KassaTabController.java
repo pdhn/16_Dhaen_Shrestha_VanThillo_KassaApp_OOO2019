@@ -16,12 +16,16 @@ public class KassaTabController {
         this.kassaTab = kassaTab;
     }
 
+    private void toonArtikelsEnTotaal(){
+        kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
+        kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling() + " - Korting: " + winkel.getKortingForBestelling() + " = " + winkel.getTotaalMetKorting());
+    }
+
     public void addArtikelToBestelling(){
         try{
             winkel.addArtikelToBestelling(kassaTab.getTextField());
 
-            kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
-            kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
+            toonArtikelsEnTotaal();
         }
         catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -35,8 +39,7 @@ public class KassaTabController {
         try{
             winkel.removeArtikelFromBestelling(code);
 
-            kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
-            kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
+            toonArtikelsEnTotaal();
         }
         catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -63,17 +66,12 @@ public class KassaTabController {
         try {
             winkel.setBestellingOffHold();
 
-            kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
-            kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
+            toonArtikelsEnTotaal();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Geen bestelling on hold");
             alert.showAndWait();
         }
-    }
-
-    public void setTotaalWithKorting() {
-        kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling() + " - Korting: " + winkel.getKortingForBestelling() + " = " + winkel.getTotaalMetKorting());
     }
 }
