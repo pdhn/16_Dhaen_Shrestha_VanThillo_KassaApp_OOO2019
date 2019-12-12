@@ -17,13 +17,13 @@ public class KlantController implements Observer {
         this.klantPane = klantPane;
     }
 
-    public void setTotaalWithKorting() {
+    private void toonArtikelsEnTotaal(){
+        klantPane.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
         klantPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling() + " - Korting: " + winkel.getKortingForBestelling() + " = " + winkel.getTotaalMetKorting());
     }
 
     @Override
     public void update() {
-        klantPane.toonArtikels(winkel.getArtikelsFromBestellingForKlant());
-        klantPane.setTotaal("Totaal: " + winkel.getTotaalFromBestelling());
+        toonArtikelsEnTotaal();
     }
 }

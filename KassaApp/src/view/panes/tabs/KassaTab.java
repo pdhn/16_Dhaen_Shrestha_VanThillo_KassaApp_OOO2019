@@ -7,22 +7,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
-import model.Observer;
-import model.Subject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-public class KassaTab extends GridPane implements Subject {
+public class KassaTab extends GridPane {
     private KassaTabController kassaTabController;
     private VBox vBox;
     private TableView table;
     private TextField textField;
     private Button addButton, onHoldButton, offHoldButton, afsluitButton;
     private Label artikelCode,totaal;
-    private List<Observer> observers;
 
     public KassaTab(KassaTabController kassaTabController){
         this.setPadding(new Insets(5, 5, 5, 5));
@@ -31,8 +27,6 @@ public class KassaTab extends GridPane implements Subject {
 
         this.kassaTabController =  kassaTabController;
         kassaTabController.setView(this);
-
-        observers = new ArrayList<>();
 
         setLabels();
         setTextField();
@@ -88,10 +82,7 @@ public class KassaTab extends GridPane implements Subject {
         addButton.setOnAction(event -> kassaTabController.addArtikelToBestelling());
         onHoldButton.setOnAction(event -> kassaTabController.setBestellingOnHold());
         offHoldButton.setOnAction(event -> kassaTabController.setBestellingOffHold());
-        afsluitButton.setOnAction(event -> {
-            kassaTabController.setTotaalWithKorting();
-            notifyObservers();
-        } );
+        //afsluitButton.setOnAction(event ->);
 
         table.setRowFactory(ev -> {
             TableRow<Artikel> row = new TableRow<>();
@@ -113,7 +104,6 @@ public class KassaTab extends GridPane implements Subject {
         });
     }
 
-
     public int getTextField(){
         return Integer.parseInt(textField.getText());
     }
@@ -132,21 +122,5 @@ public class KassaTab extends GridPane implements Subject {
     public void setBestellingOnHold(){
         table.getItems().clear();
         totaal.setText("Totaal:");
-    }
-
-    @Override
-    public void registerObserver(Observer o) {
-        if (o == null) {
-            throw new IllegalArgumentException("Ongeldige observer");
-        }
-        observers.add(o);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (int i = 0; i < observers.size(); i++) {
-            Observer observer = observers.get(i);
-            observer.update();
-        }
     }
 }
