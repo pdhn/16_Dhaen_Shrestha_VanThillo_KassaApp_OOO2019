@@ -1,5 +1,5 @@
 package view.panes.tabs;
-import controller.InstellingenTabController;
+import controller.InstellingenAndArtikelTabController;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.Properties;
 
 public class InstellingenTab extends GridPane {
-    private InstellingenTabController instellingenTabController;
+    private InstellingenAndArtikelTabController instellingenAndArtikelTabController;
     private ComboBox korting;
     private TextField percentageField, bedragField;
     private Label percentageLabel, bedragLabel;
@@ -17,9 +17,9 @@ public class InstellingenTab extends GridPane {
 
     private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
 
-    public InstellingenTab(InstellingenTabController instellingenTabController) {
-        this.instellingenTabController = instellingenTabController;
-        instellingenTabController.setView(this);
+    public InstellingenTab(InstellingenAndArtikelTabController instellingenAndArtikelTabController) {
+        this.instellingenAndArtikelTabController = instellingenAndArtikelTabController;
+        instellingenAndArtikelTabController.setView(this);
 
         final ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -58,6 +58,8 @@ public class InstellingenTab extends GridPane {
 
                 properties.store(outputStream, null);
 
+                instellingenAndArtikelTabController.refreshDbTxtOrXls();
+
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
                 throw new ModelException("Error writing to config file");
@@ -70,7 +72,7 @@ public class InstellingenTab extends GridPane {
         this.add(confirmBtn, 0, 2);
 
         //Kortingen
-        korting = new ComboBox(FXCollections.observableArrayList(instellingenTabController.getKortingStrategyList()));
+        korting = new ComboBox(FXCollections.observableArrayList(instellingenAndArtikelTabController.getKortingStrategyList()));
         korting.setValue("Geen");
 
         percentageLabel = new Label("Percentage");
@@ -86,7 +88,7 @@ public class InstellingenTab extends GridPane {
         this.add(bedragField,1,6);
         this.add(kortingButton,0,7);
 
-        kortingButton.setOnAction(event -> instellingenTabController.setKorting());
+        kortingButton.setOnAction(event -> instellingenAndArtikelTabController.setKorting());
 
     }
 

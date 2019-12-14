@@ -1,16 +1,20 @@
 package controller;
 
 import javafx.scene.control.Alert;
+import model.Artikel;
 import model.Winkel;
+import view.panes.tabs.ArtikelTab;
 import view.panes.tabs.InstellingenTab;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class InstellingenTabController {
+public class InstellingenAndArtikelTabController {
     private InstellingenTab instellingenTab;
+
     private Winkel winkel;
 
-    public InstellingenTabController() {
+    public InstellingenAndArtikelTabController() {
         winkel = Winkel.getInstance();
     }
 
@@ -35,5 +39,17 @@ public class InstellingenTabController {
             alert.showAndWait();
         }
 
+    }
+
+    public void refreshDbTxtOrXls() {
+        this.winkel.setRefreshDb();
+    }
+
+    public void refreshTableArticleTab(ArtikelTab productOverviewPane) {
+        productOverviewPane.refreshTable(getArtikels());
+    }
+
+    public ArrayList<Artikel> getArtikels() {
+        return (ArrayList<Artikel>) this.winkel.getArtikelsFromDb();
     }
 }

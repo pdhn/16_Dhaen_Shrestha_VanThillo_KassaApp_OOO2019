@@ -1,5 +1,6 @@
 package view.panes.tabs;
 
+import controller.InstellingenAndArtikelTabController;
 import database.ArtikelExcelLoadSave;
 import database.ArtikelLoadSaveTemplate;
 import database.ArtikelTekstLoadSave;
@@ -21,22 +22,22 @@ import java.util.Properties;
 
 
 public class ArtikelTab extends GridPane {
+
     private TableView table;
 
-    private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
+    public ArtikelTab(InstellingenAndArtikelTabController instellingenAndArtikelTabController) {
 
+        initTable();
+        refreshTable(instellingenAndArtikelTabController.getArtikels());
+    }
 
-    public ArtikelTab() {
-
-        ArtikelLoadSaveTemplate db = initDB();
+    private void initTable() {
 
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
 
         this.add(new Label("Products:"), 0, 0, 1, 1);
-
-        ArrayList<Artikel> artikels = (ArrayList<Artikel>) db.getArtikels();
 
         TableColumn<String, Artikel> column1 = new TableColumn<>("Artikel Code");
         column1.setCellValueFactory(new PropertyValueFactory<>("artikelCode"));
@@ -61,34 +62,21 @@ public class ArtikelTab extends GridPane {
         table.getColumns().add(column4);
         table.getColumns().add(column5);
 
-        for (Artikel a : artikels) { // Add each article to table
-            table.getItems().add(a);
-        }
-
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         VBox vBox = new VBox(table);
 
         this.add(vBox, 0, 0);
-
     }
 
-    public ArtikelLoadSaveTemplate initDB() {
+    public void refreshTable(ArrayList<Artikel> artikels) {
+        int numArticles = table.getItems().size();
 
-        // --- db reads from excel or txt depending on config.properties file ---
-        try (InputStream inputStream = new FileInputStream(FILE_PATH_PROPERTIES)) {
-            Properties properties = new Properties();
-            properties.load(inputStream);
-            if (Boolean.valueOf(properties.getProperty("txt"))) {
-                return new ArtikelTekstLoadSave();
-            } else {
-                return new ArtikelExcelLoadSave();
-            }
-        } catch (IOException e) {
-            throw new ModelException("Error reading config file --->\n");
+        table.getItems().remove(0, numArticles);
+
+        for (Artikel a : artikels) {
+            table.getItems().add(a);
         }
-        // ---^db reads from excel or txt depending on config.properties file^---
 
     }
-
 }
