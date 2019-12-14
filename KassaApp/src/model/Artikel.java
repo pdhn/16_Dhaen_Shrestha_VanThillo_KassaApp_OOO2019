@@ -36,6 +36,10 @@ public class Artikel {
         return prijs;
     }
 
+    public void setVoorraad(int voorraad){
+        this.voorraad = voorraad;
+    }
+
     public int getVoorraad() {
         return voorraad;
     }

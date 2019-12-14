@@ -17,7 +17,7 @@ public class KassaTab extends GridPane {
     private VBox vBox;
     private TableView table;
     private TextField textField;
-    private Button addButton, onHoldButton, offHoldButton, afsluitButton, betaaldButton;
+    private Button addButton, onHoldButton, offHoldButton, afsluitButton, betaalButton, annuleerButton;
     private Label artikelCode,totaal;
 
     public KassaTab(KassaTabController kassaTabController){
@@ -53,12 +53,15 @@ public class KassaTab extends GridPane {
         onHoldButton = new Button("On Hold");
         offHoldButton = new Button("Off Hold");
         afsluitButton = new Button("Sluit af");
-        betaaldButton = new Button("BETAALD");
+        betaalButton = new Button("Betaal");
+        annuleerButton = new Button("Annuleer");
 
         this.add(addButton,2,0,1,1);
         this.add(onHoldButton,3,0,1,1);
         this.add(offHoldButton,4,0,1,1);
         this.add(afsluitButton,2,11,1,1);
+        this.add(betaalButton,3,11,1,1);
+        this.add(annuleerButton,4,11,1,1);
     }
 
     private void setTableView() {
@@ -83,8 +86,9 @@ public class KassaTab extends GridPane {
         addButton.setOnAction(event -> kassaTabController.addArtikelToBestelling());
         onHoldButton.setOnAction(event -> kassaTabController.setBestellingOnHold());
         offHoldButton.setOnAction(event -> kassaTabController.setBestellingOffHold());
-        //afsluitButton.setOnAction(event ->);
-        //betaaldButton.setOnAction(event -> );
+        afsluitButton.setOnAction(event -> kassaTabController.sluitBestellingAf());
+        betaalButton.setOnAction(event -> kassaTabController.betaalBestelling());
+        annuleerButton.setOnAction(event -> kassaTabController.annuleerBestelling());
 
         table.setRowFactory(ev -> {
             TableRow<Artikel> row = new TableRow<>();

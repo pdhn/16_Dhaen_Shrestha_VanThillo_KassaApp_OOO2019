@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.scene.control.Alert;
-import model.Bestelling;
 import model.Winkel;
 import view.panes.tabs.KassaTab;
 
@@ -78,10 +77,41 @@ public class KassaTabController {
             alert.showAndWait();
         }
     }
-    /**
-    public void nieuweVerkoop(){
+
+    public void sluitBestellingAf() {
         try {
+            winkel.sluitBestellingAf();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Bestelling is al afgesloten");
+            alert.showAndWait();
         }
     }
-     **/
+
+    public void betaalBestelling() {
+        try {
+            winkel.betaalBestelling();
+
+            toonArtikelsEnTotaal();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Sluit de bestelling af alvorens ze te laten betalen");
+            alert.showAndWait();
+        }
+    }
+
+    public void annuleerBestelling() {
+        try {
+            winkel.annuleerBestelling(winkel.getAfsluitBestelling());
+
+            toonArtikelsEnTotaal();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Sluit de bestelling af alvorens ze te annuleren");
+            alert.showAndWait();
+        }
+    }
 }

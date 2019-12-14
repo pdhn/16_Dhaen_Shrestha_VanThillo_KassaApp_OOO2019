@@ -57,6 +57,30 @@ public class Winkel implements Subject {
         bestellingen.add(bestelling);
     }
 
+    public void annuleerBestelling(Bestelling bestelling){
+        if(bestelling == null) throw new ModelException("Geen geldige bestelling");
+        bestellingen.remove(bestelling);
+        voegBestellingToe(new Bestelling(this.korting));
+        notifyObservers();
+    }
+
+    public void betaalBestelling(){
+        pasVoorraadAan();
+        setBestellingBetaald();
+        voegBestellingToe(new Bestelling(this.korting));
+        notifyObservers();
+    }
+
+    private void pasVoorraadAan() {
+        for(Artikel a: getAfsluitBestelling().getArtikelsForKlant()){
+            for(Artikel artikel: getArtikelsFromDb()){
+                if(a.equals(artikel)){
+                    artikel.setVoorraad(artikel.getVoorraad()-a.getAantal());
+                }
+            }
+        }
+    }
+
     public Bestelling getActieveBestelling(){
         Bestelling bestelling = null;
         for(Bestelling b: bestellingen){
@@ -67,7 +91,7 @@ public class Winkel implements Subject {
         return bestelling;
     }
 
-    public void setAfsluitBestelling(){
+    public void sluitBestellingAf(){
         getActieveBestelling().sluitAf();
     }
 
@@ -90,6 +114,7 @@ public class Winkel implements Subject {
 
     public void setBestellingOffHold() {
         if( getBestellingOnHold() == null) throw new ModelException("Er is geen bestelling on hold");
+        bestellingen.remove(getActieveBestelling());
         getBestellingOnHold().zetOffHold();
         notifyObservers();
     }
@@ -159,6 +184,22 @@ public class Winkel implements Subject {
 
     public String getTotaalString(Bestelling bestelling){
         return "Totaal: " + bestelling.getTotaal() + " - Korting: " + bestelling.getKorting() + " = " + bestelling.getTotaalMinKorting();
+    }
+
+    public String getTotaalStringFromBetaaldeBestellingen(){
+        String result = "";
+        for(Bestelling bestelling: bestellingen){
+            if(bestelling.getState().equals(bestelling.getBetaald())){
+                result += bestelling.getTijdStip();
+                result += getTotaalString(bestelling);
+                result += "\n";
+            }
+        }
+        return result;
+    }
+
+    public void schrijfDbWegNaarFile(){
+        db.save(this.getArtikelsFromDb());
     }
 
     @Override

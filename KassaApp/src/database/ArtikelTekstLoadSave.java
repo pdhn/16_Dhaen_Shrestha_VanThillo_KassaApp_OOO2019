@@ -32,13 +32,13 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate implements Artik
     }
 
     @Override
-    public void save(ArrayList lijstObjecten) {
+    public void save(List lijstObjecten) {
         this.save(lijstObjecten, TXT_FILE_PATH);
     }
 
 
     @Override
-    public void save(ArrayList lijstObjecten, String naamBestandOfTable) {
+    public void save(List lijstObjecten, String naamBestandOfTable) {
         // Convert to list of list of strings to write to file
         ArrayList<ArrayList<String>> tempReturnEntries = new ArrayList<>();
 

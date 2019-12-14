@@ -3,6 +3,8 @@ package model;
 import model.korting.Korting;
 import model.states.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,8 @@ public class Bestelling {
     private List<Artikel> artikels;
     private Korting korting;
     private State actief, onHold, sluitAf, betaald;
+    private LocalDateTime tijdstip;
+
     private static final double BTW_PERCENTAGE = 0.06;
 
     private State state;
@@ -35,7 +39,10 @@ public class Bestelling {
     public void zetOnHold(){ state.zetOnHold(); }
     public void zetOffHold() { state.zetOffHold(); }
     public void sluitAf() { state.sluitAf(); }
-    public void betaal() { state.betaal(); }
+    public void betaal() {
+        state.betaal();
+        this.tijdstip = LocalDateTime.now();
+    }
 
     public State getState(){ return state; }
     public State getActief() { return actief; }
@@ -79,6 +86,8 @@ public class Bestelling {
     public double getTotaalMinKorting(){
         return getTotaal() - getKorting();
     }
+
+    public String getTijdStip(){ return this.tijdstip + " "; }
 
     public double getTotaalMetBTW(){ return 0; }
 

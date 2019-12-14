@@ -46,7 +46,7 @@ public class ArtikelExcelLoadSave extends ExcelLoadSaveTemplate implements Artik
     }
 
     @Override
-    public void save(ArrayList lijstObjecten) {
+    public void save(List lijstObjecten) {
         this.save(lijstObjecten, EXCEL_FILE_PATH);
     }
 
@@ -54,7 +54,7 @@ public class ArtikelExcelLoadSave extends ExcelLoadSaveTemplate implements Artik
      * @param lijstObjecten Objects in this ArrayList are converted to type Artikel.
      */
     @Override
-    public void save(ArrayList lijstObjecten, String naamBestand) {
+    public void save(List lijstObjecten, String naamBestand) {
 
         ArrayList<ArrayList<String>> newObjectenToWriteLijst = new ArrayList<>();
 
