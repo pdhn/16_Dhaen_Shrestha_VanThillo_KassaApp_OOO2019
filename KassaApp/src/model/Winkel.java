@@ -11,6 +11,7 @@ import model.korting.KortingFactory;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -61,14 +62,12 @@ public class Winkel implements Subject {
 
     public void addArtikelToBestelling(int artikelCode) {
         Artikel a = db.getArtikel(artikelCode);
-        bestelling.addTotaal(a.getPrijs());
         bestelling.voegArtikelToe(a);
         notifyObservers();
     }
 
     public void removeArtikelFromBestelling(int artikelCode) {
         Artikel a = db.getArtikel(artikelCode);
-        bestelling.removeTotaal(a.getPrijs());
         bestelling.verwijderArtikel(a);
         notifyObservers();
     }
@@ -114,7 +113,6 @@ public class Winkel implements Subject {
         notifyObservers();
         bestellingOnHold = null;
     }
-
 
     @Override
     public void registerObserver(Observer o) {

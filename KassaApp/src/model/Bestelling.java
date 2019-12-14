@@ -1,48 +1,47 @@
 package model;
 
+import model.states.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bestelling {
     private List<Artikel> artikels;
-    private double totaal;
+    private State actief, onHold, sluitAf, betaald;
     private static final double BTW_PERCENTAGE = 0.06;
+
+    private State state;
 
     public Bestelling(){
         artikels = new ArrayList<>();
-        totaal = 0;
+        actief = new Actief(this);
+        onHold = new OnHold(this);
+        sluitAf = new SluitAf(this);
+        betaald = new Betaald(this);
+
+        setState(actief);
     }
 
+    public void setState(State state){ this.state = state; }
+
+    public void zetOnHold(){ state.zetOnHold(); }
+    public void zetOffHold() { state.zetOffHold(); }
+    public void sluitAf() { state.sluitAf(); }
+    public void betaal() { state.betaal(); }
+
+    public State getState(){ return state; }
+    public State getActief() { return actief; }
+    public State getOnHold() { return onHold; }
+    public State getSluitAf() { return sluitAf; }
+    public State getBetaald() { return betaald; }
+
+
     public void voegArtikelToe(Artikel a){
-        if(a == null) throw new ModelException("Geen geldig artikel");
-        if(artikels.contains(a)){
-            for(Artikel artikel: artikels){
-                if(artikel.equals(a)){
-                    artikel.verhoogAantal();
-                }
-            }
-        }
-        else artikels.add(a);
+        state.voegArtikelToe(a);
     }
 
     public void verwijderArtikel(Artikel a){
-        if(!artikels.contains(a)) throw new ModelException("Artikel kan niet verwijderd worden");
-        Artikel artikel = null;
-        for(Artikel artikel1: artikels){
-            if(artikel1.equals(a)){
-                artikel = a;
-            }
-        }
-        if(artikel.getAantal() > 1){
-            artikel.verlaagAantal();
-        }
-        else artikels.remove(a);
-    }
-
-    public void verwijderAlleArtikels(){
-        for(Artikel artikel : artikels){
-            artikels.remove(artikel);
-        }
+        state.verwijderArtikel(a);
     }
 
     public List<Artikel> getArtikelsForKassa(){
@@ -57,23 +56,14 @@ public class Bestelling {
 
     public List<Artikel> getArtikelsForKlant(){ return this.artikels; }
 
-    public void addTotaal(double prijs){
-        if(prijs < 0 ) throw new ModelException("Geen geldige prijs");
-        totaal += prijs;
-    }
-
-    public void removeTotaal(double prijs){
-        if(prijs > totaal) throw new ModelException("Prijs mag niet groter zijn dan totaal");
-        totaal -= prijs;
-    }
-
     public double getTotaal(){
-        return this.totaal;
+        double totaal = 0;
+        for(Artikel a : this.getArtikelsForKassa()){
+            totaal += a.getPrijs();
+        }
+        return totaal;
     }
 
-    public double getTotaalMetBTW(){ return this.totaal + BTW_PERCENTAGE * this.totaal; }
+    public double getTotaalMetBTW(){ return 0; }
 
-    public void nieuweVerkoop(){
-
-    }
 }
