@@ -30,6 +30,10 @@ public class Winkel implements Subject {
         korting = new Geenkorting();
         voegBestellingToe(new Bestelling(this.korting));
 
+        setRefreshDb();
+    }
+
+    public void setRefreshDb() {
         // --- db reads from excel or txt depending on config.properties file ---
         try (InputStream inputStream = new FileInputStream(FILE_PATH_PROPERTIES)) {
             Properties properties = new Properties();
