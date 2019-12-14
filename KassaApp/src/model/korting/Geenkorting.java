@@ -1,5 +1,6 @@
 package model.korting;
 
+import model.Bestelling;
 import model.ModelException;
 
 public class Geenkorting implements Korting {
@@ -21,7 +22,7 @@ public class Geenkorting implements Korting {
     }
 
     @Override
-    public double getKorting() {
+    public double getKorting(Bestelling bestelling) {
         return 0;
     }
 }

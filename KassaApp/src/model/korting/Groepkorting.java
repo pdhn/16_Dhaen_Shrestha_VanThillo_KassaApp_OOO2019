@@ -1,16 +1,13 @@
 package model.korting;
 
+import model.Bestelling;
 import model.ModelException;
 import model.Winkel;
 
 public class Groepkorting implements Korting {
-    private Winkel winkel;
     private int percentage, bedrag;
 
-    public Groepkorting(){
-        winkel = Winkel.getInstance();
-
-    }
+    public Groepkorting(){ }
 
     @Override
     public void setPercentage(int percentage){
@@ -25,7 +22,7 @@ public class Groepkorting implements Korting {
     }
 
     @Override
-    public double getKorting() {
-        return winkel.getTotaalFromBestelling()*this.percentage/100;
+    public double getKorting(Bestelling bestelling) {
+        return bestelling.getTotaal()*this.percentage/100;
     }
 }

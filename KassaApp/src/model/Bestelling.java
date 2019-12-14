@@ -1,5 +1,6 @@
 package model;
 
+import model.korting.Korting;
 import model.states.*;
 
 import java.util.ArrayList;
@@ -7,19 +8,26 @@ import java.util.List;
 
 public class Bestelling {
     private List<Artikel> artikels;
+    private Korting korting;
     private State actief, onHold, sluitAf, betaald;
     private static final double BTW_PERCENTAGE = 0.06;
 
     private State state;
 
-    public Bestelling(){
+    public Bestelling(Korting korting){
         artikels = new ArrayList<>();
+        setKorting(korting);
+
         actief = new Actief(this);
         onHold = new OnHold(this);
         sluitAf = new SluitAf(this);
         betaald = new Betaald(this);
 
         setState(actief);
+    }
+
+    public void setKorting(Korting korting) {
+        this.korting = korting;
     }
 
     public void setState(State state){ this.state = state; }
@@ -62,6 +70,14 @@ public class Bestelling {
             totaal += a.getPrijs();
         }
         return totaal;
+    }
+
+    public double getKorting(){
+        return korting.getKorting(this);
+    }
+
+    public double getTotaalMinKorting(){
+        return getTotaal() - getKorting();
     }
 
     public double getTotaalMetBTW(){ return 0; }

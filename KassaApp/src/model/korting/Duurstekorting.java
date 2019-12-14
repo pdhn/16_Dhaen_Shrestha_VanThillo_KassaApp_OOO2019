@@ -1,16 +1,14 @@
 package model.korting;
 
 import model.Artikel;
+import model.Bestelling;
 import model.ModelException;
 import model.Winkel;
 
 public class Duurstekorting implements Korting {
-    private Winkel winkel;
     private int percentage, bedrag;
 
-    public Duurstekorting(){
-        winkel = Winkel.getInstance();
-    }
+    public Duurstekorting(){ }
 
     @Override
     public void setPercentage(int percentage){
@@ -25,9 +23,9 @@ public class Duurstekorting implements Korting {
     }
 
     @Override
-    public double getKorting() {
+    public double getKorting(Bestelling bestelling) {
         double duurste = 0;
-        for(Artikel a : winkel.getArtikelsFromBestellingForKassa()){
+        for(Artikel a : bestelling.getArtikelsForKassa()){
             if(a.getPrijs() > duurste){
                 duurste = a.getPrijs();
             }

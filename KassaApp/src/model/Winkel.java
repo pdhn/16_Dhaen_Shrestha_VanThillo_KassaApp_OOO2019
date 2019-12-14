@@ -11,7 +11,6 @@ import model.korting.KortingFactory;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -19,17 +18,17 @@ import java.util.Properties;
 public class Winkel implements Subject {
     private static Winkel uniqueInstance;
     private ArtikelLoadSaveTemplate db;
-    private Bestelling bestelling, bestellingOnHold;
+    private List<Bestelling> bestellingen;
     private List<Observer> observers;
     private Korting korting;
 
     private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
 
     private Winkel() {
-        bestelling = new Bestelling();
-        bestellingOnHold = null;
+        bestellingen = new ArrayList<>();
         observers = new ArrayList<>();
         korting = new Geenkorting();
+        voegBestellingToe(new Bestelling(this.korting));
 
         // --- db reads from excel or txt depending on config.properties file ---
         try (InputStream inputStream = new FileInputStream(FILE_PATH_PROPERTIES)) {
@@ -53,31 +52,97 @@ public class Winkel implements Subject {
         return uniqueInstance;
     }
 
+    public void voegBestellingToe(Bestelling bestelling){
+        if(bestelling == null) throw new ModelException("Geen geldige bestelling");
+        bestellingen.add(bestelling);
+    }
+
+    public Bestelling getActieveBestelling(){
+        Bestelling bestelling = null;
+        for(Bestelling b: bestellingen){
+            if(b.getState().equals(b.getActief())){
+                bestelling = b;
+            }
+        }
+        return bestelling;
+    }
+
+    public void setAfsluitBestelling(){
+        getActieveBestelling().sluitAf();
+    }
+
+    public Bestelling getAfsluitBestelling(){
+        Bestelling bestelling = null;
+        for(Bestelling b: bestellingen){
+            if(b.getState().equals(b.getSluitAf())){
+                bestelling = b;
+            }
+        }
+        return bestelling;
+    }
+
+    public void setBestellingOnHold() {
+        if (getBestellingOnHold() != null) throw new ModelException("Er is al een bestelling on hold");
+        getActieveBestelling().zetOnHold();
+        bestellingen.add(new Bestelling(this.korting));
+        notifyObservers();
+    }
+
+    public void setBestellingOffHold() {
+        if( getBestellingOnHold() == null) throw new ModelException("Er is geen bestelling on hold");
+        getBestellingOnHold().zetOffHold();
+        notifyObservers();
+    }
+
+    private Bestelling getBestellingOnHold(){
+        Bestelling bestelling = null;
+        for(Bestelling b: bestellingen){
+            if(b.getState().equals(b.getOnHold())){
+                bestelling = b;
+            }
+        }
+        return bestelling;
+    }
+
+    public void setBestellingBetaald(){
+        getAfsluitBestelling().betaal();
+    }
+
     public void setKorting(String type, int percentage, int bedrag){
         Korting korting = KortingFactory.createKorting(type);
         korting.setPercentage(percentage);
         korting.setBedrag(bedrag);
         this.korting = korting;
+        getActieveBestelling().setKorting(this.korting);
     }
 
     public void addArtikelToBestelling(int artikelCode) {
         Artikel a = db.getArtikel(artikelCode);
-        bestelling.voegArtikelToe(a);
+        getActieveBestelling().voegArtikelToe(a);
         notifyObservers();
     }
 
     public void removeArtikelFromBestelling(int artikelCode) {
         Artikel a = db.getArtikel(artikelCode);
-        bestelling.verwijderArtikel(a);
+        if(getActieveBestelling() == null){
+            getAfsluitBestelling().verwijderArtikel(a);
+        }
+        getActieveBestelling().verwijderArtikel(a);
         notifyObservers();
     }
 
     public List<Artikel> getArtikelsFromBestellingForKassa() {
-        return bestelling.getArtikelsForKassa();
+        if(getActieveBestelling() == null){
+            return getAfsluitBestelling().getArtikelsForKassa();
+        }
+        return getActieveBestelling().getArtikelsForKassa();
     }
 
     public List<Artikel> getArtikelsFromBestellingForKlant() {
-        return bestelling.getArtikelsForKlant();
+        if(getActieveBestelling() == null){
+            return getAfsluitBestelling().getArtikelsForKlant();
+        }
+        return getActieveBestelling().getArtikelsForKlant();
     }
 
     public List<Artikel> getArtikelsFromDb() {
@@ -92,26 +157,8 @@ public class Winkel implements Subject {
         return list;
     }
 
-    public double getTotaalFromBestelling() {
-        return bestelling.getTotaal();
-    }
-
-    public double getKortingForBestelling() { return korting.getKorting(); }
-
-    public double getTotaalMetKorting() { return getTotaalFromBestelling() - getKortingForBestelling();}
-
-    public void setBestellingOnHold() {
-        if (bestellingOnHold != null) throw new ModelException("Er is al een bestelling on hold");
-        bestellingOnHold = bestelling;
-        bestelling = new Bestelling();
-        notifyObservers();
-    }
-
-    public void setBestellingOffHold() {
-        if (bestellingOnHold == null) throw new ModelException("Er is geen bestelling on hold");
-        bestelling = bestellingOnHold;
-        notifyObservers();
-        bestellingOnHold = null;
+    public String getTotaalString(Bestelling bestelling){
+        return "Totaal: " + bestelling.getTotaal() + " - Korting: " + bestelling.getKorting() + " = " + bestelling.getTotaalMinKorting();
     }
 
     @Override

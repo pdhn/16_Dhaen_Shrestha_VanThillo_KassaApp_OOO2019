@@ -19,7 +19,10 @@ public class KassaTabController {
 
     private void toonArtikelsEnTotaal(){
         kassaTab.toonArtikels(winkel.getArtikelsFromBestellingForKassa());
-        kassaTab.setTotaal("Totaal: " + winkel.getTotaalFromBestelling() + " - Korting: " + winkel.getKortingForBestelling() + " = " + winkel.getTotaalMetKorting());
+        if(winkel.getActieveBestelling() == null){
+            kassaTab.setTotaal(winkel.getTotaalString(winkel.getAfsluitBestelling()));
+        }
+        else kassaTab.setTotaal(winkel.getTotaalString(winkel.getActieveBestelling()));
     }
 
     public void addArtikelToBestelling(){
