@@ -3,7 +3,6 @@ package model;
 import model.korting.Korting;
 import model.states.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
