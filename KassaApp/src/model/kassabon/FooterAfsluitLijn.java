@@ -2,16 +2,15 @@ package model.kassabon;
 
 
 public class FooterAfsluitLijn extends KassaBonDecorator {
-    private KassaBon kassaBon;
     private String boodschap;
 
     public FooterAfsluitLijn(KassaBon kassaBon){
-        this.kassaBon = kassaBon;
+        super(kassaBon);
     }
 
     @Override
     public String printKassaBon() {
-        return kassaBon.printKassaBon() + "\n" + boodschap;
+        return super.printKassaBon() + "\n" + boodschap;
     }
 
     @Override

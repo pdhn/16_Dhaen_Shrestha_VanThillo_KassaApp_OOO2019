@@ -2,10 +2,9 @@ package model.kassabon;
 
 public class HeaderAlgemeneBoodschap extends KassaBonDecorator {
     private String boodschap;
-    private KassaBon kassaBon;
 
     public HeaderAlgemeneBoodschap(KassaBon kassaBon){
-        this.kassaBon = kassaBon;
+        super(kassaBon);
     }
 
     @Override

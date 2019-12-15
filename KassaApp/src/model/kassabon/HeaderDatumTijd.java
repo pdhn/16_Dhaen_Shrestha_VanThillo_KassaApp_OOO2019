@@ -3,10 +3,9 @@ package model.kassabon;
 import java.time.LocalDateTime;
 
 public class HeaderDatumTijd extends KassaBonDecorator {
-    private KassaBon kassaBon;
 
     public HeaderDatumTijd(KassaBon kassaBon){
-        this.kassaBon = kassaBon;
+        super(kassaBon);
     }
 
     @Override

@@ -31,7 +31,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../2018-2019/Webontwikkeling 2/Examen/out/artifacts/web_war_exploded/WEB-INF/lib/junit4 (2).jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/junit-4.13-rc-2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

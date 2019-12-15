@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a6b8c72-57dd-420a-b551-eb26a4bb1e14" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KassaApp/src/controller/KassaTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/controller/KassaTabController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/Winkel.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/Winkel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/InstellingenTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/InstellingenTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/KassaTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/view/panes/tabs/KassaTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/kassabon/FooterAfsluitLijn.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/kassabon/FooterAfsluitLijn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/kassabon/FooterBTW.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/kassabon/FooterBTW.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/kassabon/FooterKorting.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/kassabon/FooterKorting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/kassabon/HeaderAlgemeneBoodschap.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/kassabon/HeaderAlgemeneBoodschap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/kassabon/HeaderDatumTijd.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/kassabon/HeaderDatumTijd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KassaApp/src/model/kassabon/KassaBonDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/KassaApp/src/model/kassabon/KassaBonDecorator.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,12 +32,24 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/KassaApp/src/database/tests" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/junit-4.13-rc-2.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
@@ -49,18 +66,6 @@
       </method>
     </configuration>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -73,11 +78,23 @@
       <updated>1575986390231</updated>
       <workItem from="1575986391589" duration="24000" />
       <workItem from="1576155421684" duration="5287000" />
+      <workItem from="1576441871414" duration="1159000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="573" y="100" key="#Project_Structure" timestamp="1576160402634">
