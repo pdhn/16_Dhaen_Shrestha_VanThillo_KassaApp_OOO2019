@@ -1,9 +1,6 @@
 package view.panes.tabs;
 
 import controller.InstellingenAndArtikelTabController;
-import database.ArtikelExcelLoadSave;
-import database.ArtikelLoadSaveTemplate;
-import database.ArtikelTekstLoadSave;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -12,13 +9,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
-import model.ModelException;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Properties;
 
 
 public class ArtikelTab extends GridPane {

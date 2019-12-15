@@ -8,36 +8,33 @@ import model.Artikel;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import static database.ArrayListConverter.convertToArrayListArtikel;
 
-public class ArtikelExcelLoadSave extends ExcelLoadSaveTemplate implements ArtikelLoadSaveTemplate {
-
-    private HashMap<Integer, Artikel> artikelen;
+public class ArtikelExcelLoadSave implements LoadSaveStrategy {
     private ExcelPlugin excelPlugin;
 
     protected static final String EXCEL_FILE_PATH = "src\\bestanden\\artikel.xls";
 
     public ArtikelExcelLoadSave() {
-        artikelen = new HashMap();
         excelPlugin = new ExcelPlugin();
-        this.load(EXCEL_FILE_PATH);
     }
 
     @Override
-    public ArrayList load() {
-        return this.load(EXCEL_FILE_PATH);
-    }
-
-    @Override
-    public ArrayList<Artikel> load(String naamXlsBestand) {
+    public List<Artikel> load() {
 
         try {
-            ArrayList<ArrayList<String>> lijstObjectenVanXlsBestand = excelPlugin.read(new File(naamXlsBestand));
+            ArrayList<ArrayList<String>> lijstObjectenVanXlsBestand = excelPlugin.read(new File(EXCEL_FILE_PATH));
 
-            return convertToArrayListArtikel(lijstObjectenVanXlsBestand, artikelen);
+            List<Artikel> artikelen = new ArrayList<>();
+            for (ArrayList<String> as : lijstObjectenVanXlsBestand) {
+                Artikel artikel = new Artikel(Integer.parseInt(as.get(0)), as.get(1), as.get(2),
+                        Double.parseDouble(as.get(3)), Integer.parseInt(as.get(4)));
+
+                artikelen.add(artikel);
+            }
+            return artikelen;
+
         } catch (IOException e) {
             throw new DBException("IO Exception ---> \n" + e.getStackTrace());
         } catch (BiffException e) {
@@ -45,16 +42,11 @@ public class ArtikelExcelLoadSave extends ExcelLoadSaveTemplate implements Artik
         }
     }
 
-    @Override
-    public void save(List lijstObjecten) {
-        this.save(lijstObjecten, EXCEL_FILE_PATH);
-    }
-
     /**
      * @param lijstObjecten Objects in this ArrayList are converted to type Artikel.
      */
     @Override
-    public void save(List lijstObjecten, String naamBestand) {
+    public void save(List lijstObjecten) {
 
         ArrayList<ArrayList<String>> newObjectenToWriteLijst = new ArrayList<>();
 
@@ -71,7 +63,7 @@ public class ArtikelExcelLoadSave extends ExcelLoadSaveTemplate implements Artik
         }
 
         try {
-            excelPlugin.write(new File(naamBestand), newObjectenToWriteLijst);
+            excelPlugin.write(new File(EXCEL_FILE_PATH), newObjectenToWriteLijst);
 
         } catch (BiffException e) {
             throw new DBException("Biff Exception ---> \n" + e.getStackTrace());
@@ -80,20 +72,5 @@ public class ArtikelExcelLoadSave extends ExcelLoadSaveTemplate implements Artik
         } catch (WriteException e) {
             throw new DBException("Error during writing to file ---> \n" + e.getStackTrace());
         }
-    }
-
-    /**
-     * @param artikelCode Must be larger than 1 and less than amount of articles saved.
-     */
-    public Artikel getArtikel(int artikelCode) {
-        if (artikelCode < 1 || artikelCode > artikelen.size()) throw new DBException("Niet bestaande artikel code.");
-        return artikelen.get(artikelCode);
-    }
-
-    /**
-     * @return All articles saved in HashMap.
-     */
-    public List<Artikel> getArtikels() {
-        return new ArrayList<>(artikelen.values());
     }
 }

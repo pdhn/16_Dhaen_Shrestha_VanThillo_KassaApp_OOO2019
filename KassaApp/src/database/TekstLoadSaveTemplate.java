@@ -3,7 +3,7 @@ package database;
 import java.io.*;
 import java.util.*;
 
-abstract class TekstLoadSaveTemplate implements LoadSaveTemplate{
+abstract class TekstLoadSaveTemplate implements LoadSaveStrategy {
 
     private static final String CHARSET_NAME_FOR_WRITER = "utf-8";
 

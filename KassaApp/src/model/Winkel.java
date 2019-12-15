@@ -1,23 +1,17 @@
 package model;
 
-import database.ArtikelExcelLoadSave;
-import database.ArtikelLoadSaveTemplate;
-import database.ArtikelTekstLoadSave;
+import database.ArtikelDB;
 import model.korting.Geenkorting;
 import model.korting.Korting;
 import model.korting.KortingEnum;
 import model.korting.KortingFactory;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class Winkel implements Subject {
     private static Winkel uniqueInstance;
-    private ArtikelLoadSaveTemplate db;
+    private ArtikelDB db;
     private List<Bestelling> bestellingen;
     private List<Observer> observers;
     private Korting korting;
@@ -25,28 +19,11 @@ public class Winkel implements Subject {
     private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
 
     private Winkel() {
+        db = new ArtikelDB();
         bestellingen = new ArrayList<>();
         observers = new ArrayList<>();
         korting = new Geenkorting();
         voegBestellingToe(new Bestelling(this.korting));
-
-        setRefreshDb();
-    }
-
-    public void setRefreshDb() {
-        // --- db reads from excel or txt depending on config.properties file ---
-        try (InputStream inputStream = new FileInputStream(FILE_PATH_PROPERTIES)) {
-            Properties properties = new Properties();
-            properties.load(inputStream);
-            if (Boolean.valueOf(properties.getProperty("txt"))) {
-                db = new ArtikelTekstLoadSave();
-            } else {
-                db = new ArtikelExcelLoadSave();
-            }
-        } catch (IOException e) {
-            throw new ModelException("Error reading config file --->\n");
-        }
-        // ---^db reads from excel or txt depending on config.properties file^---
     }
 
     public static Winkel getInstance() {
@@ -212,7 +189,7 @@ public class Winkel implements Subject {
     }
 
     public void schrijfDbWegNaarFile(){
-        db.save(this.getArtikelsFromDb());
+        db.save();
     }
 
     @Override

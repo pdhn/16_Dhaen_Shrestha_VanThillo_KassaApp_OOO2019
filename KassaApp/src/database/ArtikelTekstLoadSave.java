@@ -4,41 +4,31 @@ import model.Artikel;
 
 import java.util.*;
 
-import static database.ArrayListConverter.convertToArrayListArtikel;
-
-public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate implements ArtikelLoadSaveTemplate {
-
-    private HashMap<Integer, Artikel> artikelen;
+public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
 
     protected static final String TXT_FILE_PATH = "src\\bestanden\\artikel.txt";
     protected static final String DELIMITER = ",";
 
     public ArtikelTekstLoadSave() {
-        artikelen = new HashMap();
-        this.load();
+
     }
 
     @Override
-    public ArrayList<Artikel> load() {
-        return this.load(TXT_FILE_PATH);
-    }
+    public List<Artikel> load() {
+        ArrayList<ArrayList<String>> tempEntriesAsString = this.load(TXT_FILE_PATH, DELIMITER);
 
-    @Override
-    public ArrayList<Artikel> load(String naamBestandOfTable) {
-        // Load into HashMap
-        ArrayList<ArrayList<String>> tempEntriesAsString = this.load(naamBestandOfTable, DELIMITER);
+        List<Artikel> artikelen = new ArrayList<>();
+        for (ArrayList<String> as : tempEntriesAsString) {
+            Artikel artikel = new Artikel(Integer.parseInt(as.get(0)), as.get(1), as.get(2),
+                    Double.parseDouble(as.get(3)), Integer.parseInt(as.get(4)));
 
-        return convertToArrayListArtikel(tempEntriesAsString, artikelen);
+            artikelen.add(artikel);
+        }
+        return artikelen;
     }
 
     @Override
     public void save(List lijstObjecten) {
-        this.save(lijstObjecten, TXT_FILE_PATH);
-    }
-
-
-    @Override
-    public void save(List lijstObjecten, String naamBestandOfTable) {
         // Convert to list of list of strings to write to file
         ArrayList<ArrayList<String>> tempReturnEntries = new ArrayList<>();
 
@@ -54,22 +44,6 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate implements Artik
             tempReturnEntries.add(tempArtikelAsStrings);
         }
 
-        this.save(tempReturnEntries, naamBestandOfTable, DELIMITER);
+        this.save(tempReturnEntries, TXT_FILE_PATH, DELIMITER);
     }
-
-    /**
-     * @param artikelCode Must be larger than 1 and less than amount of articles saved.
-     */
-    public Artikel getArtikel(int artikelCode) {
-        if (artikelCode < 1 || artikelCode > artikelen.size()) throw new DBException("Niet bestaande artikel code.");
-        return artikelen.get(artikelCode);
-    }
-
-    /**
-     * @return All articles saved in HashMap.
-     */
-    public List<Artikel> getArtikels() {
-        return new ArrayList<>(artikelen.values());
-    }
-
 }

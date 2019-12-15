@@ -59,7 +59,7 @@ public class InstellingenTab extends GridPane {
 
                 properties.store(outputStream, null);
 
-                instellingenAndArtikelTabController.refreshDbTxtOrXls();
+                //instellingenAndArtikelTabController.refreshDbTxtOrXls();
 
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();

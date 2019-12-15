@@ -73,10 +73,6 @@ public class InstellingenAndArtikelTabController {
         }
     }
 
-    public void refreshDbTxtOrXls() {
-        this.winkel.setRefreshDb();
-    }
-
     public void refreshTableArticleTab(ArtikelTab productOverviewPane) {
         productOverviewPane.refreshTable(getArtikels());
     }
