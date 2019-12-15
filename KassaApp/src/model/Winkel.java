@@ -70,6 +70,8 @@ public class Winkel implements Subject {
 
     public void betaalBestelling(){
         pasVoorraadAan();
+        getAfsluitBestelling().setKassaBon();
+        System.out.println(getAfsluitBestelling().getKassaBonPrintMethode());
         setBestellingBetaald();
         voegBestellingToe(new Bestelling(this.korting));
         notifyObservers();
@@ -145,6 +147,13 @@ public class Winkel implements Subject {
         getActieveBestelling().setKorting(this.korting);
     }
 
+    public void setKassaBon() {
+        if (getActieveBestelling() == null){
+            getAfsluitBestelling().setKassaBon();
+        }
+        else getActieveBestelling().setKassaBon();
+    }
+
     public void addArtikelToBestelling(int artikelCode) {
         Artikel a = db.getArtikel(artikelCode);
         getActieveBestelling().voegArtikelToe(a);
@@ -156,7 +165,7 @@ public class Winkel implements Subject {
         if(getActieveBestelling() == null){
             getAfsluitBestelling().verwijderArtikel(a);
         }
-        getActieveBestelling().verwijderArtikel(a);
+        else getActieveBestelling().verwijderArtikel(a);
         notifyObservers();
     }
 

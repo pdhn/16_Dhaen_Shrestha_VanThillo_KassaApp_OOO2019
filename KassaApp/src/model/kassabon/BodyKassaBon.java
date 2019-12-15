@@ -3,11 +3,11 @@ package model.kassabon;
 import model.Artikel;
 import model.Winkel;
 
-public class Standaard implements KassaBon {
+public class BodyKassaBon implements KassaBon {
     private Winkel winkel;
 
-    public Standaard(){
-        winkel = Winkel.getInstance();
+    public BodyKassaBon(){
+        this.winkel = Winkel.getInstance();
     }
 
     @Override
@@ -21,4 +21,7 @@ public class Standaard implements KassaBon {
         result += "Betaald (inclusief korting) : " + winkel.getAfsluitBestelling().getTotaalMinKorting() + " €";
         return result;
     }
+
+    @Override
+    public void setBoodschap(String boodschap) { }
 }

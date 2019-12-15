@@ -11,9 +11,10 @@ import java.util.Properties;
 public class InstellingenTab extends GridPane {
     private InstellingenAndArtikelTabController instellingenAndArtikelTabController;
     private ComboBox korting;
-    private TextField percentageField, bedragField;
-    private Label percentageLabel, bedragLabel;
-    private Button kortingButton;
+    private TextField percentageField, bedragField, checkBox1Field, checkBox5Field;
+    private Label percentageLabel, bedragLabel, kassaBonLabel;
+    private Button kortingButton, kassaBonButton;
+    private CheckBox checkBox1, checkBox2, checkBox3, checkBox4, checkBox5;
 
     private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
 
@@ -90,6 +91,28 @@ public class InstellingenTab extends GridPane {
 
         kortingButton.setOnAction(event -> instellingenAndArtikelTabController.setKorting());
 
+        //KassaBon
+        kassaBonLabel = new Label("Extra lijnen voor kassabon:");
+        checkBox1 = new CheckBox("Toon algemene boodschap");
+        checkBox1Field = new TextField();
+        checkBox2 = new CheckBox("Toon datum en tijd");
+        checkBox3 = new CheckBox("Toon korting");
+        checkBox4 = new CheckBox("Toon BTW");
+        checkBox5 = new CheckBox("Afsluitlijn");
+        checkBox5Field = new TextField();
+        kassaBonButton = new Button("Apply");
+
+        this.add(kassaBonLabel,0,8);
+        this.add(checkBox1,0,9);
+        this.add(checkBox1Field,1,9);
+        this.add(checkBox2,0,10);
+        this.add(checkBox3,0,11);
+        this.add(checkBox4,0,12);
+        this.add(checkBox5,0,13);
+        this.add(checkBox5Field,1,14);
+        this.add(kassaBonButton,0,15);
+
+        kassaBonButton.setOnAction(event -> instellingenAndArtikelTabController.setKassaBon());
     }
 
 
@@ -117,10 +140,40 @@ public class InstellingenTab extends GridPane {
         return bedrag;
     }
 
-    public void setAlert(){
+    private void setAlert(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Geef een geheel getal in");
         alert.showAndWait();
     }
+
+    public String isCheckBox1Selected(){
+        return "" + checkBox1.isSelected();
+    }
+
+    public String getCheckBox1Field(){
+        return checkBox1Field.getText();
+    }
+
+    public String isCheckBox2Selected(){
+        return "" + checkBox2.isSelected();
+    }
+
+    public String isCheckBox3Selected(){
+        return "" + checkBox3.isSelected();
+    }
+
+    public String isCheckBox4Selected(){
+        return "" + checkBox4.isSelected();
+    }
+
+    public String isCheckBox5Selected(){
+        return "" + checkBox5.isSelected();
+    }
+
+    public String getCheckBox5Field(){
+        return checkBox5Field.getText();
+    }
+
 }
+

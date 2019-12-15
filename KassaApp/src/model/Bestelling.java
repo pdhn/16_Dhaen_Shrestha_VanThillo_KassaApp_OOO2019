@@ -1,5 +1,8 @@
 package model;
 
+import model.kassabon.BodyKassaBon;
+import model.kassabon.KassaBon;
+import model.kassabon.KassaBonFactory;
 import model.korting.Korting;
 import model.states.*;
 
@@ -12,6 +15,7 @@ public class Bestelling {
     private Korting korting;
     private State actief, onHold, sluitAf, betaald;
     private LocalDateTime tijdstip;
+    private KassaBon kassaBon;
 
     private static final double BTW_PERCENTAGE = 0.06;
 
@@ -27,6 +31,8 @@ public class Bestelling {
         betaald = new Betaald(this);
 
         setState(actief);
+
+        //setKassaBon();
     }
 
     public void setKorting(Korting korting) {
@@ -48,6 +54,14 @@ public class Bestelling {
     public State getOnHold() { return onHold; }
     public State getSluitAf() { return sluitAf; }
     public State getBetaald() { return betaald; }
+
+    public void setKassaBon(){
+        this.kassaBon = KassaBonFactory.createKassaBon();
+    }
+
+    public String getKassaBonPrintMethode(){
+        return kassaBon.printKassaBon();
+    }
 
 
     public void voegArtikelToe(Artikel a){
@@ -88,6 +102,8 @@ public class Bestelling {
 
     public String getTijdStip(){ return this.tijdstip + " "; }
 
-    public double getTotaalMetBTW(){ return 0; }
+    public double getBtw(){ return this.getTotaal()*BTW_PERCENTAGE; }
+
+    public double getTotaalZonderBTW(){ return this.getTotaal()-this.getBtw(); }
 
 }
