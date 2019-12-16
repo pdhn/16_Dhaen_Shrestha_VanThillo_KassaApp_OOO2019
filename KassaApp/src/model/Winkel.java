@@ -1,6 +1,8 @@
 package model;
 
 import database.ArtikelDB;
+import model.kassabon.KassaBon;
+import model.kassabon.KassaBonFactory;
 import model.korting.Geenkorting;
 import model.korting.Korting;
 import model.korting.KortingEnum;
@@ -47,8 +49,8 @@ public class Winkel implements Subject {
 
     public void betaalBestelling(){
         pasVoorraadAan();
-        getAfsluitBestelling().setKassaBon();
-        System.out.println(getAfsluitBestelling().getKassaBonPrintMethode());
+        KassaBon kassaBon = KassaBonFactory.createKassaBon();
+        System.out.println(kassaBon.printKassaBon(this));
         setBestellingBetaald();
         voegBestellingToe(new Bestelling(this.korting));
         notifyObservers();
@@ -122,13 +124,6 @@ public class Winkel implements Subject {
         korting.setBedrag(bedrag);
         this.korting = korting;
         getActieveBestelling().setKorting(this.korting);
-    }
-
-    public void setKassaBon() {
-        if (getActieveBestelling() == null){
-            getAfsluitBestelling().setKassaBon();
-        }
-        else getActieveBestelling().setKassaBon();
     }
 
     public void addArtikelToBestelling(int artikelCode) {

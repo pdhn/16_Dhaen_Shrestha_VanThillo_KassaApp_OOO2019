@@ -15,7 +15,6 @@ public class Bestelling {
     private Korting korting;
     private State actief, onHold, sluitAf, betaald;
     private LocalDateTime tijdstip;
-    private KassaBon kassaBon;
 
     private static final double BTW_PERCENTAGE = 0.06;
 
@@ -31,8 +30,6 @@ public class Bestelling {
         betaald = new Betaald(this);
 
         setState(actief);
-
-        //setKassaBon();
     }
 
     public void setKorting(Korting korting) {
@@ -54,15 +51,6 @@ public class Bestelling {
     public State getOnHold() { return onHold; }
     public State getSluitAf() { return sluitAf; }
     public State getBetaald() { return betaald; }
-
-    public void setKassaBon(){
-        this.kassaBon = KassaBonFactory.createKassaBon();
-    }
-
-    public String getKassaBonPrintMethode(){
-        return kassaBon.printKassaBon();
-    }
-
 
     public void voegArtikelToe(Artikel a){
         state.voegArtikelToe(a);

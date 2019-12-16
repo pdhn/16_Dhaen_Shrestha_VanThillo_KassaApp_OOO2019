@@ -64,7 +64,6 @@ public class InstellingenAndArtikelTabController {
             config.store(os, "---No Comment---");
             os.close();
 
-            winkel.setKassaBon();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

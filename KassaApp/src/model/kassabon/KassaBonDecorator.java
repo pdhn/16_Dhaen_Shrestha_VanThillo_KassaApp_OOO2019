@@ -1,5 +1,7 @@
 package model.kassabon;
 
+import model.Winkel;
+
 public abstract class KassaBonDecorator implements KassaBon {
     private KassaBon kassaBon;
 
@@ -8,7 +10,7 @@ public abstract class KassaBonDecorator implements KassaBon {
     }
 
     @Override
-    public String printKassaBon(){
-        return this.kassaBon.printKassaBon();
+    public String printKassaBon(Winkel winkel){
+        return kassaBon.printKassaBon(winkel);
     }
 }

@@ -1,6 +1,8 @@
 package model.kassabon;
 
 
+import model.Winkel;
+
 public class FooterAfsluitLijn extends KassaBonDecorator {
     private String boodschap;
 
@@ -9,8 +11,8 @@ public class FooterAfsluitLijn extends KassaBonDecorator {
     }
 
     @Override
-    public String printKassaBon() {
-        return super.printKassaBon() + "\n" + boodschap;
+    public String printKassaBon(Winkel winkel) {
+        return super.printKassaBon(winkel) + "\n" + boodschap;
     }
 
     @Override

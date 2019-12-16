@@ -4,18 +4,15 @@ import model.Artikel;
 import model.Winkel;
 
 public class BodyKassaBon implements KassaBon {
-    private Winkel winkel;
 
-    public BodyKassaBon(){
-        this.winkel = Winkel.getInstance();
-    }
+    public BodyKassaBon(){ }
 
     @Override
-    public String printKassaBon() {
-        String result = "Omscrhijving       Aantal  Prijs\n";
+    public String printKassaBon(Winkel winkel) {
+        String result = "\nOmscrhijving\t\tAantal\tPrijs\n";
         result += "**********************************\n";
         for(Artikel a: winkel.getArtikelsFromBestellingForKlant()){
-            result += a.getArtikelCode() + "        " + a.getAantal() + "   " + a.getPrijs() + "\n";
+            result += a.getOmschrijving() + "\t\t\t\t" + a.getAantal() + "\t" + a.getPrijs() + "\n";
         }
         result += "**********************************\n";
         result += "Betaald (inclusief korting) : " + winkel.getAfsluitBestelling().getTotaalMinKorting() + " €";

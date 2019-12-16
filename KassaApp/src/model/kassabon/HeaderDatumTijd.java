@@ -1,5 +1,7 @@
 package model.kassabon;
 
+import model.Winkel;
+
 import java.time.LocalDateTime;
 
 public class HeaderDatumTijd extends KassaBonDecorator {
@@ -9,12 +11,10 @@ public class HeaderDatumTijd extends KassaBonDecorator {
     }
 
     @Override
-    public String printKassaBon() {
-        return LocalDateTime.now() + "\n" + kassaBon.printKassaBon();
+    public String printKassaBon(Winkel winkel) {
+        return "\n" + LocalDateTime.now() + super.printKassaBon(winkel);
     }
 
     @Override
-    public void setBoodschap(String boodschap) {
-
-    }
+    public void setBoodschap(String boodschap) {}
 }

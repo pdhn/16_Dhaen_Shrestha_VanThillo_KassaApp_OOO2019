@@ -1,5 +1,7 @@
 package model.kassabon;
 
+import model.Winkel;
+
 public class HeaderAlgemeneBoodschap extends KassaBonDecorator {
     private String boodschap;
 
@@ -13,7 +15,7 @@ public class HeaderAlgemeneBoodschap extends KassaBonDecorator {
     }
 
     @Override
-    public String printKassaBon() {
-        return this.boodschap + "\n" + kassaBon.printKassaBon() ;
+    public String printKassaBon(Winkel winkel) {
+        return "\n" + this.boodschap + super.printKassaBon(winkel) ;
     }
 }
