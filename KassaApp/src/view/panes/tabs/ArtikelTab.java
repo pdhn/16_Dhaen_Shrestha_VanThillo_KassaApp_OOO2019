@@ -1,7 +1,8 @@
 package view.panes.tabs;
 
-import controller.InstellingenAndArtikelTabController;
+import controller.ArtikelTabController;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -10,26 +11,30 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Artikel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class ArtikelTab extends GridPane {
-
+    private ArtikelTabController artikelTabController;
     private TableView table;
+    private Label productsLabel;
+    private Button refreshButton;
 
-    public ArtikelTab(InstellingenAndArtikelTabController instellingenAndArtikelTabController) {
+    public ArtikelTab(ArtikelTabController artikelTabController) {
+        this.artikelTabController = artikelTabController;
+        artikelTabController.setView(this);
 
-        initTable();
-        refreshTable(instellingenAndArtikelTabController.getArtikels());
+        setTable();
+        setRefresh();
     }
 
-    private void initTable() {
-
+    private void setTable() {
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
 
-        this.add(new Label("Products:"), 0, 0, 1, 1);
+        productsLabel = new Label("Products");
+        this.add(productsLabel, 0, 0, 1, 1);
 
         TableColumn<String, Artikel> column1 = new TableColumn<>("Artikel Code");
         column1.setCellValueFactory(new PropertyValueFactory<>("artikelCode"));
@@ -59,16 +64,22 @@ public class ArtikelTab extends GridPane {
         VBox vBox = new VBox(table);
 
         this.add(vBox, 0, 0);
-    }
 
-    public void refreshTable(ArrayList<Artikel> artikels) {
-        int numArticles = table.getItems().size();
-
-        table.getItems().remove(0, numArticles);
-
-        for (Artikel a : artikels) {
+        for(Artikel a : artikelTabController.getArtikels()){
             table.getItems().add(a);
         }
+    }
 
+    public void setRefresh() {
+        refreshButton = new Button("Refresh");
+        this.add(refreshButton,0,1);
+        refreshButton.setOnAction(event -> artikelTabController.refresh());
+    }
+
+    public void toonArtikels(List<Artikel> artikels) {
+        table.getItems().clear();
+        for(Artikel a : artikels){
+            table.getItems().add(a);
+        }
     }
 }

@@ -14,19 +14,7 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
     }
 
     private void setLoadSaveStrategy() {
-        try{
-            Properties config = new Properties();
-            FileInputStream in = new FileInputStream("src\\bestanden\\config.properties");
-            config.load(in);
-            in.close();
-
-            if(config.getProperty("file").equals("txt")){
-                loadSaveStrategy = new ArtikelTekstLoadSave();
-            }
-            else loadSaveStrategy = new ArtikelExcelLoadSave();
-        } catch (Exception e){
-            throw new DBException("Fout tijdens het kiezen van de input file");
-        }
+        loadSaveStrategy = LoadSaveFactory.createLoadSave();
         setArtikelen();
     }
 

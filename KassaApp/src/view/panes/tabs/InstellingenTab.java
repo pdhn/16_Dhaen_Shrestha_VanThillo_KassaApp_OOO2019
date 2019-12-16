@@ -1,79 +1,37 @@
 package view.panes.tabs;
-import controller.InstellingenAndArtikelTabController;
+import controller.InstellingenTabController;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import model.ModelException;
-
-import java.io.*;
-import java.util.Properties;
 
 public class InstellingenTab extends GridPane {
-    private InstellingenAndArtikelTabController instellingenAndArtikelTabController;
+    private InstellingenTabController instellingenTabController;
     private ComboBox korting;
     private TextField percentageField, bedragField, checkBox1Field, checkBox5Field;
-    private Label percentageLabel, bedragLabel, kassaBonLabel;
-    private Button kortingButton, kassaBonButton;
+    private Label bestandLabel, infoLabel, percentageLabel, bedragLabel, kassaBonLabel;
+    private Button txtButton, excelButton, kortingButton, kassaBonButton;
     private CheckBox checkBox1, checkBox2, checkBox3, checkBox4, checkBox5;
 
-    private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
+    public InstellingenTab(InstellingenTabController instellingenTabController) {
+        this.instellingenTabController = instellingenTabController;
+        instellingenTabController.setView(this);
 
-    public InstellingenTab(InstellingenAndArtikelTabController instellingenAndArtikelTabController) {
-        this.instellingenAndArtikelTabController = instellingenAndArtikelTabController;
-        instellingenAndArtikelTabController.setView(this);
+        //Input-Output
+        bestandLabel = new Label("Input/output file:");
+        txtButton = new Button("Txt");
+        excelButton = new Button("Excel");
+        infoLabel = new Label("Deze file zal bij de volgende sessie gebruikt worden.");
 
-        final ToggleGroup toggleGroup = new ToggleGroup();
+        this.add(bestandLabel, 0, 0);
+        this.add(txtButton, 0, 1);
+        this.add(excelButton,1,1);
+        this.add(infoLabel,0,2);
 
-        RadioButton radioBtnBestandTypeExcel = new RadioButton("Gebruik Excel voor Input/Output");
-        RadioButton radioBtnBestandTypeTxt = new RadioButton("Gebruik txt voor Input/Output");
-
-        Properties properties;
-
-        try (InputStream inputStream = new FileInputStream(FILE_PATH_PROPERTIES)) {
-            properties = new Properties();
-            properties.load(inputStream);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new ModelException("Error reading config file");
-        }
-
-        radioBtnBestandTypeExcel.setToggleGroup(toggleGroup);
-        radioBtnBestandTypeExcel.setSelected(Boolean.valueOf(properties.getProperty("excel")));
-
-        radioBtnBestandTypeTxt.setToggleGroup(toggleGroup);
-        radioBtnBestandTypeTxt.setSelected(Boolean.valueOf(properties.getProperty("txt")));
-
-
-        this.add(radioBtnBestandTypeExcel, 0, 0);
-        this.add(radioBtnBestandTypeTxt, 0, 1);
-
-        Button confirmBtn = new Button("Confirm");
-
-        confirmBtn.setOnAction(e -> {
-
-            try (OutputStream outputStream = new FileOutputStream(FILE_PATH_PROPERTIES)) {
-
-                properties.setProperty("excel", String.valueOf(radioBtnBestandTypeExcel.isSelected()));
-                properties.setProperty("txt", String.valueOf(radioBtnBestandTypeTxt.isSelected()));
-
-                properties.store(outputStream, null);
-
-                //instellingenAndArtikelTabController.refreshDbTxtOrXls();
-
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-                throw new ModelException("Error writing to config file");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                throw new ModelException("Error writing to config file");
-            }
-        });
-
-        this.add(confirmBtn, 0, 2);
+        txtButton.setOnAction(event ->  instellingenTabController.setFileTxt());
+        excelButton.setOnAction(event ->  instellingenTabController.setFileExcel());
 
         //Kortingen
-        korting = new ComboBox(FXCollections.observableArrayList(instellingenAndArtikelTabController.getKortingStrategyList()));
+        korting = new ComboBox(FXCollections.observableArrayList(instellingenTabController.getKortingStrategyList()));
         korting.setValue("Geen");
 
         percentageLabel = new Label("Percentage");
@@ -89,7 +47,7 @@ public class InstellingenTab extends GridPane {
         this.add(bedragField,1,6);
         this.add(kortingButton,0,7);
 
-        kortingButton.setOnAction(event -> instellingenAndArtikelTabController.setKorting());
+        kortingButton.setOnAction(event -> instellingenTabController.setKorting());
 
         //KassaBon
         kassaBonLabel = new Label("Extra lijnen voor kassabon:");
@@ -112,7 +70,7 @@ public class InstellingenTab extends GridPane {
         this.add(checkBox5Field,1,14);
         this.add(kassaBonButton,0,15);
 
-        kassaBonButton.setOnAction(event -> instellingenAndArtikelTabController.setKassaBon());
+        kassaBonButton.setOnAction(event -> instellingenTabController.setKassaBon());
     }
 
 

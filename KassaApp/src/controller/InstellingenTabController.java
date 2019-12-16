@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import model.Artikel;
 import model.Winkel;
@@ -12,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class InstellingenAndArtikelTabController {
+public class InstellingenTabController {
     private InstellingenTab instellingenTab;
 
     private Winkel winkel;
 
-    public InstellingenAndArtikelTabController() {
+    public InstellingenTabController() {
         winkel = Winkel.getInstance();
     }
 
@@ -72,12 +74,44 @@ public class InstellingenAndArtikelTabController {
         }
     }
 
-    public void refreshTableArticleTab(ArtikelTab productOverviewPane) {
-        productOverviewPane.refreshTable(getArtikels());
+    public void setFileTxt() {
+        try{
+            Properties config = new Properties();
+            FileInputStream in = new FileInputStream("src\\bestanden\\config.properties");
+            config.load(in);
+            in.close();
+
+            config.setProperty("file","Tekst");
+
+            FileOutputStream os = new FileOutputStream("src\\bestanden\\config.properties");
+            config.store(os, "---No Comment---");
+            os.close();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("De File kon niet aangepast worden");
+            alert.showAndWait();
+        }
     }
 
-    public ArrayList<Artikel> getArtikels() {
-        return (ArrayList<Artikel>) this.winkel.getArtikelsFromDb();
-    }
+    public void setFileExcel() {
+        try{
+            Properties config = new Properties();
+            FileInputStream in = new FileInputStream("src\\bestanden\\config.properties");
+            config.load(in);
+            in.close();
 
+            config.setProperty("file","Excel");
+
+            FileOutputStream os = new FileOutputStream("src\\bestanden\\config.properties");
+            config.store(os, "---No Comment---");
+            os.close();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("De File kon niet aangepast worden");
+            alert.showAndWait();
+        }
+
+    }
 }

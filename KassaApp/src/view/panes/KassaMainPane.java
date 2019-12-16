@@ -1,7 +1,8 @@
 package view.panes;
 
 
-import controller.InstellingenAndArtikelTabController;
+import controller.ArtikelTabController;
+import controller.InstellingenTabController;
 import controller.KassaTabController;
 import controller.LogTabController;
 import javafx.scene.control.Tab;
@@ -22,15 +23,12 @@ public class KassaMainPane extends BorderPane {
         GridPane kassaTabPane = new KassaTab(kassaTabController);
         Tab kassaTab = new Tab("Kassa", kassaTabPane);
 
-        InstellingenAndArtikelTabController instellingenAndArtikelTabController = new InstellingenAndArtikelTabController();
-        //^Artikel Tab also uses instellingen tab controller^
+        ArtikelTabController artikelTabController = new ArtikelTabController();
+        GridPane artikelTabPane = new ArtikelTab(artikelTabController);
+        Tab artikelTab = new Tab("Artikelen", artikelTabPane);
 
-        GridPane productOverviewPane = new ArtikelTab(instellingenAndArtikelTabController);
-        Tab artikelTab = new Tab("Artikelen", productOverviewPane);
-
-        artikelTab.setOnSelectionChanged(event -> instellingenAndArtikelTabController.refreshTableArticleTab((ArtikelTab) productOverviewPane));
-
-        GridPane instellingenPane = new InstellingenTab(instellingenAndArtikelTabController);
+        InstellingenTabController instellingenTabController = new InstellingenTabController();
+        GridPane instellingenPane = new InstellingenTab(instellingenTabController);
         Tab instellingTab = new Tab("Instellingen", instellingenPane);
 
         LogTabController logTabController = new LogTabController();
