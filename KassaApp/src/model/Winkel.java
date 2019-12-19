@@ -22,11 +22,12 @@ public class Winkel implements Subject {
     private int onHoldCounter;
 
     private Winkel() {
-        db = new ArtikelDB();
-        bestellingen = new ArrayList<>();
-        observers = new ArrayList<>();
-        korting = new Geenkorting();
+        this.db = new ArtikelDB();
+        this.bestellingen = new ArrayList<>();
+        this.observers = new ArrayList<>();
+        this.korting = new Geenkorting();
         voegBestellingToe(new Bestelling(this.korting));
+        this.onHoldCounter = 0;
     }
 
     public static Winkel getInstance() {
@@ -59,6 +60,12 @@ public class Winkel implements Subject {
         System.out.println(kassaBon.printKassaBon(this));
         setBestellingBetaald();
         voegBestellingToe(new Bestelling(this.korting));
+        if(this.onHoldCounter!=0){
+            this.onHoldCounter--;
+            if(this.onHoldCounter==0){
+                bestellingen.remove(getBestellingOnHold());
+            }
+        }
         notifyObservers();
     }
 
@@ -96,6 +103,7 @@ public class Winkel implements Subject {
         if (getBestellingOnHold() != null) throw new ModelException("Er is al een bestelling on hold");
         setArtikelsFromOnHold(getActieveBestelling().getArtikelsForKassa());
         getActieveBestelling().zetOnHold();
+        this.onHoldCounter = 3;
         voegBestellingToe(new Bestelling(this.korting));
         notifyObservers();
     }

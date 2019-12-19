@@ -1,4 +1,4 @@
-1,artikel1,gr1,12.5,2
+1,artikel1,gr1,12.5,3
 2,artikel2,gr1,22.4,10
 3,bartikel3,gr1,12.5,10
 4,artikel4,gr1,50.5,10
@@ -7,4 +7,4 @@
 7,artikel7,gr1,3.75,10
 8,artikel8,gr2,18.5,10
 9,artikel9,gr2,114.5,10
-10,artikel10,gr2,66.25,9
+10,artikel10,gr2,66.25,10,
