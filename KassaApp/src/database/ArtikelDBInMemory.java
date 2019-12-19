@@ -2,7 +2,6 @@ package database;
 
 import model.Artikel;
 
-import java.io.FileInputStream;
 import java.util.*;
 
 public class ArtikelDBInMemory implements ArtikelDBStrategy {

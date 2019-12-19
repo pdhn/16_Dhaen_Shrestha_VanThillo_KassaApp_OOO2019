@@ -22,82 +22,89 @@ public class InstellingenTab extends GridPane {
         this.instellingenTabController = instellingenTabController;
         instellingenTabController.setView(this);
 
-        //Input-Output
-        bestandTitel = new Label("BESTANDEN");
-        bestandLabel = new Label("Input/output file:");
-        txtButton = new Button("Txt");
-        excelButton = new Button("Excel");
-        infoLabel = new Label();
+        setInputOutput();
+        setKortingen();
+        setKassaBon();
+    }
 
-        this.add(bestandTitel,0,0);
-        this.add(bestandLabel, 0, 1);
-        this.add(txtButton, 0, 2);
-        this.add(excelButton,1,2);
-        this.add(infoLabel,0,3,2,1);
+    private void setInputOutput() {
+        this.bestandTitel = new Label("BESTANDEN");
+        this.bestandLabel = new Label("Input/output file:");
+        this.txtButton = new Button("Txt");
+        this.excelButton = new Button("Excel");
+        this.infoLabel = new Label();
 
-        txtButton.setOnAction(event ->  instellingenTabController.setFileTxt());
-        excelButton.setOnAction(event ->  instellingenTabController.setFileExcel());
+        this.add(this.bestandTitel,0,0);
+        this.add(this.bestandLabel, 0, 1);
+        this.add(this.txtButton, 0, 2);
+        this.add(this.excelButton,1,2);
+        this.add(this.infoLabel,0,3,2,1);
 
-        //Kortingen
-        korting = new ComboBox(FXCollections.observableArrayList(instellingenTabController.getKortingStrategyList()));
-        korting.setValue("Geen");
+        this.txtButton.setOnAction(event ->  this.instellingenTabController.setFileTxt());
+        this.excelButton.setOnAction(event ->  this.instellingenTabController.setFileExcel());
+    }
 
-        kortingTitel = new Label("KORTINGEN");
-        percentageLabel = new Label("Percentage");
-        bedragLabel = new Label("Bedrag");
-        percentageField = new TextField("0");
-        bedragField = new TextField("0");
-        kortingButton = new Button("Apply");
+    private void setKortingen() {
+        this.korting = new ComboBox(FXCollections.observableArrayList(this.instellingenTabController.getKortingStrategyList()));
+        this.korting.setValue("Geen");
 
-        this.add(kortingTitel,0,4);
-        this.add(korting, 0, 5);
-        this.add(percentageLabel,0,6);
-        this.add(bedragLabel,1,6);
-        this.add(percentageField,0,7);
-        this.add(bedragField,1,7);
-        this.add(kortingButton,0,8);
+        this.kortingTitel = new Label("KORTINGEN");
+        this.percentageLabel = new Label("Percentage");
+        this.bedragLabel = new Label("Bedrag");
+        this.percentageField = new TextField("0");
+        this.bedragField = new TextField("0");
+        this.kortingButton = new Button("Apply");
 
-        kortingButton.setOnAction(event -> instellingenTabController.setKorting());
+        this.add(this.kortingTitel,0,4);
+        this.add(this.korting, 0, 5);
+        this.add(this.percentageLabel,0,6);
+        this.add(this.bedragLabel,1,6);
+        this.add(this.percentageField,0,7);
+        this.add(this.bedragField,1,7);
+        this.add(this.kortingButton,0,8);
 
-        //KassaBon
-        kassaBonTitel = new Label("KASSABON");
-        kassaBonLabel = new Label("Extra lijnen voor kassabon:");
-        checkBox1 = new CheckBox("Toon algemene boodschap");
-        checkBox1Field = new TextField();
-        checkBox2 = new CheckBox("Toon datum en tijd");
-        checkBox3 = new CheckBox("Toon korting");
-        checkBox4 = new CheckBox("Toon BTW");
-        checkBox5 = new CheckBox("Afsluitlijn");
-        checkBox5Field = new TextField();
-        kassaBonButton = new Button("Apply");
+        this.kortingButton.setOnAction(event -> this.instellingenTabController.setKorting());
+    }
 
-        this.add(kassaBonTitel,0,9);
-        this.add(kassaBonLabel,0,10);
-        this.add(checkBox1,0,11);
-        this.add(checkBox1Field,1,11);
-        this.add(checkBox2,0,12);
-        this.add(checkBox3,0,13);
-        this.add(checkBox4,0,14);
-        this.add(checkBox5,0,15);
-        this.add(checkBox5Field,1,15);
-        this.add(kassaBonButton,0,16);
+    private void setKassaBon() {
+        this.kassaBonTitel = new Label("KASSABON");
+        this.kassaBonLabel = new Label("Extra lijnen voor kassabon:");
+        this.checkBox1 = new CheckBox("Toon algemene boodschap");
+        this.checkBox1Field = new TextField();
+        this.checkBox2 = new CheckBox("Toon datum en tijd");
+        this.checkBox3 = new CheckBox("Toon korting");
+        this.checkBox4 = new CheckBox("Toon BTW");
+        this.checkBox5 = new CheckBox("Afsluitlijn");
+        this.checkBox5Field = new TextField();
+        this.kassaBonButton = new Button("Apply");
 
-        kassaBonButton.setOnAction(event -> instellingenTabController.setKassaBon());
+        this.add(this.kassaBonTitel,0,9);
+        this.add(this.kassaBonLabel,0,10);
+        this.add(this.checkBox1,0,11);
+        this.add(this.checkBox1Field,1,11);
+        this.add(this.checkBox2,0,12);
+        this.add(this.checkBox3,0,13);
+        this.add(this.checkBox4,0,14);
+        this.add(this.checkBox5,0,15);
+        this.add(this.checkBox5Field,1,15);
+        this.add(this.kassaBonButton,0,16);
+
+        this.kassaBonButton.setOnAction(event -> this.instellingenTabController.setKassaBon());
     }
 
     public void setInfoLabel(String string){
-        infoLabel.setText(string);
+        this.infoLabel.setText(string);
     }
 
 
     public String getKorting(){
-        return korting.getValue().toString();
+        return this.korting.getValue().toString();
     }
 
     public int getPercentageField() {
         int percentage = 0;
         try {
-            percentage = Integer.parseInt(percentageField.getText());
+            percentage = Integer.parseInt(this.percentageField.getText());
         } catch (Exception e) {
             setAlert();
         }
@@ -107,7 +114,7 @@ public class InstellingenTab extends GridPane {
     public int getBedragField(){
         int bedrag = 0;
         try {
-            bedrag = Integer.parseInt(bedragField.getText());
+            bedrag = Integer.parseInt(this.bedragField.getText());
         } catch (Exception e) {
             setAlert();
         }
@@ -122,32 +129,31 @@ public class InstellingenTab extends GridPane {
     }
 
     public String isCheckBox1Selected(){
-        return "" + checkBox1.isSelected();
+        return "" + this.checkBox1.isSelected();
     }
 
     public String getCheckBox1Field(){
-        return checkBox1Field.getText();
+        return this.checkBox1Field.getText();
     }
 
     public String isCheckBox2Selected(){
-        return "" + checkBox2.isSelected();
+        return "" + this.checkBox2.isSelected();
     }
 
     public String isCheckBox3Selected(){
-        return "" + checkBox3.isSelected();
+        return "" + this.checkBox3.isSelected();
     }
 
     public String isCheckBox4Selected(){
-        return "" + checkBox4.isSelected();
+        return "" + this.checkBox4.isSelected();
     }
 
     public String isCheckBox5Selected(){
-        return "" + checkBox5.isSelected();
+        return "" + this.checkBox5.isSelected();
     }
 
     public String getCheckBox5Field(){
-        return checkBox5Field.getText();
+        return this.checkBox5Field.getText();
     }
-
 }
 

@@ -3,12 +3,9 @@ package model.korting;
 import model.Artikel;
 import model.Bestelling;
 import model.ModelException;
-import model.Winkel;
 
 public class Duurstekorting implements Korting {
     private int percentage, bedrag;
-
-    public Duurstekorting(){ }
 
     @Override
     public void setPercentage(int percentage){

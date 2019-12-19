@@ -36,32 +36,32 @@ public class KassaTab extends GridPane {
     }
 
     private void setLabels() {
-        artikelCode = new Label("Artikelcode:");
-        this.add(artikelCode,0,0,1,1);
+        this.artikelCode = new Label("Artikelcode:");
+        this.add(this.artikelCode,0,0,1,1);
 
-        totaal = new Label("Totaal:");
-        this.add(totaal,0,11,2,1);
+        this.totaal = new Label("Totaal:");
+        this.add(this.totaal,0,11,2,1);
     }
 
     private void setTextField() {
-        textField = new TextField();
-        this.add(textField,1,0,1,1);
+        this.textField = new TextField();
+        this.add(this.textField,1,0,1,1);
     }
 
     private void setButtons() {
-        addButton = new Button("Voeg Toe");
-        onHoldButton = new Button("On Hold");
-        offHoldButton = new Button("Off Hold");
-        afsluitButton = new Button("Sluit af");
-        betaalButton = new Button("Betaal");
-        annuleerButton = new Button("Annuleer");
+        this.addButton = new Button("Voeg Toe");
+        this.onHoldButton = new Button("On Hold");
+        this.offHoldButton = new Button("Off Hold");
+        this.afsluitButton = new Button("Sluit af");
+        this.betaalButton = new Button("Betaal");
+        this.annuleerButton = new Button("Annuleer");
 
-        this.add(addButton,2,0,1,1);
-        this.add(onHoldButton,3,0,1,1);
-        this.add(offHoldButton,4,0,1,1);
-        this.add(afsluitButton,2,11,1,1);
-        this.add(betaalButton,3,11,1,1);
-        this.add(annuleerButton,4,11,1,1);
+        this.add(this.addButton,2,0,1,1);
+        this.add(this.onHoldButton,3,0,1,1);
+        this.add(this.offHoldButton,4,0,1,1);
+        this.add(this.afsluitButton,2,11,1,1);
+        this.add(this.betaalButton,3,11,1,1);
+        this.add(this.annuleerButton,4,11,1,1);
     }
 
     private void setTableView() {
@@ -71,26 +71,26 @@ public class KassaTab extends GridPane {
         TableColumn<String, Artikel> column2 = new TableColumn<>("Prijs");
         column2.setCellValueFactory(new PropertyValueFactory<>("prijs"));
 
-        table = new TableView();
+        this.table = new TableView();
 
-        table.getColumns().add(column1);
-        table.getColumns().add(column2);
+        this.table.getColumns().add(column1);
+        this.table.getColumns().add(column2);
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        vBox = new VBox(table);
-        this.add(vBox, 0, 1,6,10);
+        this.vBox = new VBox(this.table);
+        this.add(this.vBox, 0, 1,6,10);
     }
 
     private void setHandlers() {
-        addButton.setOnAction(event -> kassaTabController.addArtikelToBestelling());
-        onHoldButton.setOnAction(event -> kassaTabController.setBestellingOnHold());
-        offHoldButton.setOnAction(event -> kassaTabController.setBestellingOffHold());
-        afsluitButton.setOnAction(event -> kassaTabController.sluitBestellingAf());
-        betaalButton.setOnAction(event -> kassaTabController.betaalBestelling());
-        annuleerButton.setOnAction(event -> kassaTabController.annuleerBestelling());
+        this.addButton.setOnAction(event -> this.kassaTabController.addArtikelToBestelling());
+        this.onHoldButton.setOnAction(event -> this.kassaTabController.setBestellingOnHold());
+        this.offHoldButton.setOnAction(event -> this.kassaTabController.setBestellingOffHold());
+        this.afsluitButton.setOnAction(event -> this.kassaTabController.sluitBestellingAf());
+        this.betaalButton.setOnAction(event -> this.kassaTabController.betaalBestelling());
+        this.annuleerButton.setOnAction(event -> this.kassaTabController.annuleerBestelling());
 
-        table.setRowFactory(ev -> {
+        this.table.setRowFactory(ev -> {
             TableRow<Artikel> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if(event.getClickCount() == 1 && (!row.isEmpty())) {
@@ -102,7 +102,7 @@ public class KassaTab extends GridPane {
                     Optional<ButtonType> result = alert.showAndWait();
                     if(result.isPresent() && result.get() == ButtonType.OK){
                         int artikelCode = row.getItem().getArtikelCode();
-                        kassaTabController.removeArtikel(artikelCode);
+                        this.kassaTabController.removeArtikel(artikelCode);
                     }
                 }
             });
@@ -111,22 +111,22 @@ public class KassaTab extends GridPane {
     }
 
     public int getTextField(){
-        return Integer.parseInt(textField.getText());
+        return Integer.parseInt(this.textField.getText());
     }
 
     public void toonArtikels(List<Artikel> artikels){
-        table.getItems().clear();
+        this.table.getItems().clear();
         for(Artikel a : artikels){
-            table.getItems().add(a);
+            this.table.getItems().add(a);
         }
     }
 
     public void setTotaal(String string){
-        totaal.setText(string);
+        this.totaal.setText(string);
     }
 
     public void setBestellingOnHold(){
-        table.getItems().clear();
-        totaal.setText("Totaal:");
+        this.table.getItems().clear();
+        this.totaal.setText("Totaal:");
     }
 }

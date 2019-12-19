@@ -1,16 +1,11 @@
 package controller;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import model.Artikel;
 import model.Winkel;
-import view.panes.tabs.ArtikelTab;
 import view.panes.tabs.InstellingenTab;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 

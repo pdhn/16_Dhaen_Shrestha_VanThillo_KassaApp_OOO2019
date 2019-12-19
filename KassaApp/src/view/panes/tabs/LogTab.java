@@ -21,18 +21,22 @@ public class LogTab extends GridPane {
         this.logTabController = logTabController;
         logTabController.setView(this);
 
-        label = new Label("Betaalde bestellingen:");
-        log = new TextArea();
-        refresh = new Button("Refresh");
+        setLogNodes();
+    }
 
-        this.add(label,0,0);
-        this.add(log,0,1);
-        this.add(refresh,0,2);
+    private void setLogNodes() {
+        this.label = new Label("Betaalde bestellingen:");
+        this.log = new TextArea();
+        this.refresh = new Button("Refresh");
 
-        refresh.setOnAction(event ->  logTabController.getStringFromBetaaldeBestellingen());
+        this.add(this.label,0,0);
+        this.add(this.log,0,1);
+        this.add(this.refresh,0,2);
+
+        this.refresh.setOnAction(event ->  this.logTabController.getStringFromBetaaldeBestellingen());
     }
 
     public void setLog(String string){
-        log.setText(string);
+        this.log.setText(string);
     }
 }

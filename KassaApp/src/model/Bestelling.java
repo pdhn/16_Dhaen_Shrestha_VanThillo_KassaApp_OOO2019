@@ -18,15 +18,15 @@ public class Bestelling {
     private State state;
 
     public Bestelling(Korting korting){
-        artikels = new ArrayList<>();
+        this.artikels = new ArrayList<>();
         setKorting(korting);
 
-        actief = new Actief(this);
-        onHold = new OnHold(this);
-        sluitAf = new SluitAf(this);
-        betaald = new Betaald(this);
+        this.actief = new Actief(this);
+        this.onHold = new OnHold(this);
+        this.sluitAf = new SluitAf(this);
+        this.betaald = new Betaald(this);
 
-        setState(actief);
+        setState(this.actief);
     }
 
     public void setKorting(Korting korting) {
@@ -35,26 +35,26 @@ public class Bestelling {
 
     public void setState(State state){ this.state = state; }
 
-    public void zetOnHold(){ state.zetOnHold(); }
-    public void zetOffHold() { state.zetOffHold(); }
-    public void sluitAf() { state.sluitAf(); }
+    public void zetOnHold(){ this.state.zetOnHold(); }
+    public void zetOffHold() { this.state.zetOffHold(); }
+    public void sluitAf() { this.state.sluitAf(); }
     public void betaal() {
         state.betaal();
         this.tijdstip = LocalDateTime.now();
     }
 
-    public State getState(){ return state; }
-    public State getActief() { return actief; }
-    public State getOnHold() { return onHold; }
-    public State getSluitAf() { return sluitAf; }
-    public State getBetaald() { return betaald; }
+    public State getState(){ return this.state; }
+    public State getActief() { return this.actief; }
+    public State getOnHold() { return this.onHold; }
+    public State getSluitAf() { return this.sluitAf; }
+    public State getBetaald() { return this.betaald; }
 
     public void voegArtikelToe(Artikel a){
-        state.voegArtikelToe(a);
+        this.state.voegArtikelToe(a);
     }
 
     public void verwijderArtikel(Artikel a){
-        state.verwijderArtikel(a);
+        this.state.verwijderArtikel(a);
     }
 
     public void setArtikels(List<Artikel> nieuweArtikels){
@@ -75,10 +75,10 @@ public class Bestelling {
         for(Artikel artikel : artikelsZonderAantallen){
             if(this.artikels.contains(artikel)){
                 int plaats = artikels.indexOf(artikel);
-                artikels.get(plaats).verhoogAantal();
+                this.artikels.get(plaats).verhoogAantal();
             }
             else{
-                artikels.add(artikel);
+                this.artikels.add(artikel);
             }
         }
     }
@@ -94,7 +94,7 @@ public class Bestelling {
     }
 
     public double getKorting(){
-        return korting.getKorting(this);
+        return this.korting.getKorting(this);
     }
 
     public double getTotaalMinKorting(){

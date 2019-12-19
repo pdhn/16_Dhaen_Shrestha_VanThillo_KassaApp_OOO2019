@@ -17,14 +17,7 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     public List<Artikel> load() {
         ArrayList<ArrayList<String>> tempEntriesAsString = this.load(TXT_FILE_PATH, DELIMITER);
 
-        List<Artikel> artikelen = new ArrayList<>();
-        for (ArrayList<String> as : tempEntriesAsString) {
-            Artikel artikel = new Artikel(Integer.parseInt(as.get(0)), as.get(1), as.get(2),
-                    Double.parseDouble(as.get(3)), Integer.parseInt(as.get(4)));
-
-            artikelen.add(artikel);
-        }
-        return artikelen;
+        return StringsToArtikels.getArtikelsFromStrings(tempEntriesAsString);
     }
 
     @Override

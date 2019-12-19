@@ -1,6 +1,5 @@
 package view.panes;
 
-
 import controller.ArtikelTabController;
 import controller.InstellingenTabController;
 import controller.KassaTabController;
@@ -15,30 +14,54 @@ import view.panes.tabs.ArtikelTab;
 import view.panes.tabs.LogTab;
 
 public class KassaMainPane extends BorderPane {
+    private TabPane tabPane;
+    private Tab kassaTab, artikelTab, instellingenTab, logTab;
+    private GridPane kassaPane, artikelPane, instellingenPane, logPane;
+    private KassaTabController kassaTabController;
+    private ArtikelTabController artikelTabController;
+    private InstellingenTabController instellingenTabController;
+    private LogTabController logTabController;
+
+
     public KassaMainPane() {
+        setKassaTab();
+        setArtikelTab();
+        setInstellingenTab();
+        setLogTab();
+        setTabPane();
+    }
 
-        TabPane tabPane = new TabPane();
+    private void setKassaTab() {
+        this.kassaTabController = new KassaTabController();
+        this.kassaPane = new KassaTab(this.kassaTabController);
+        this.kassaTab = new Tab("Kassa", this.kassaPane);
+    }
 
-        KassaTabController kassaTabController = new KassaTabController();
-        GridPane kassaTabPane = new KassaTab(kassaTabController);
-        Tab kassaTab = new Tab("Kassa", kassaTabPane);
+    private void setArtikelTab() {
+        this.artikelTabController = new ArtikelTabController();
+        this.artikelPane = new ArtikelTab(this.artikelTabController);
+        this.artikelTab = new Tab("Artikelen", this.artikelPane);
+    }
 
-        ArtikelTabController artikelTabController = new ArtikelTabController();
-        GridPane artikelTabPane = new ArtikelTab(artikelTabController);
-        Tab artikelTab = new Tab("Artikelen", artikelTabPane);
+    private void setInstellingenTab() {
+        this.instellingenTabController = new InstellingenTabController();
+        this.instellingenPane = new InstellingenTab(this.instellingenTabController);
+        this.instellingenTab = new Tab("Instellingen", this.instellingenPane);
+    }
 
-        InstellingenTabController instellingenTabController = new InstellingenTabController();
-        GridPane instellingenPane = new InstellingenTab(instellingenTabController);
-        Tab instellingTab = new Tab("Instellingen", instellingenPane);
+    private void setLogTab() {
+        this.logTabController = new LogTabController();
+        this.logPane = new LogTab(this.logTabController);
+        this.logTab = new Tab("Log", this.logPane);
+    }
 
-        LogTabController logTabController = new LogTabController();
-        GridPane logPane = new LogTab(logTabController);
-        Tab logTab = new Tab("Log", logPane);
+    private void setTabPane() {
+        this.tabPane = new TabPane();
 
-        tabPane.getTabs().add(kassaTab);
-        tabPane.getTabs().add(artikelTab);
-        tabPane.getTabs().add(instellingTab);
-        tabPane.getTabs().add(logTab);
-        this.setCenter(tabPane);
+        this.tabPane.getTabs().add(this.kassaTab);
+        this.tabPane.getTabs().add(this.artikelTab);
+        this.tabPane.getTabs().add(this.instellingenTab);
+        this.tabPane.getTabs().add(this.logTab);
+        this.setCenter(this.tabPane);
     }
 }

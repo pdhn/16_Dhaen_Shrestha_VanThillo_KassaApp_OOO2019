@@ -6,9 +6,6 @@ import model.ModelException;
 public class Geenkorting implements Korting {
     private int percentage, bedrag;
 
-    public Geenkorting(){
-    }
-
     @Override
     public void setPercentage(int percentage){
         if(percentage < 0 || percentage > 100) throw new ModelException("Geen geldig percentage");

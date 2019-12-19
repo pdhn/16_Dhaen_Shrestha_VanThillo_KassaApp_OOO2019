@@ -2,12 +2,9 @@ package model.korting;
 
 import model.Bestelling;
 import model.ModelException;
-import model.Winkel;
 
 public class Groepkorting implements Korting {
     private int percentage, bedrag;
-
-    public Groepkorting(){ }
 
     @Override
     public void setPercentage(int percentage){

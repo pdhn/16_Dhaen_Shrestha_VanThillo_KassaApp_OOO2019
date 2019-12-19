@@ -40,7 +40,7 @@ public class Winkel implements Subject {
     public void voegBestellingToe(Bestelling bestelling){
         if(bestelling == null) throw new ModelException("Geen geldige bestelling");
         setAantalFromArtikels();
-        bestellingen.add(bestelling);
+        this.bestellingen.add(bestelling);
     }
 
     public void sluitBestellingAf(){
@@ -49,7 +49,7 @@ public class Winkel implements Subject {
 
     public void annuleerBestelling(Bestelling bestelling){
         if(bestelling == null) throw new ModelException("Geen geldige bestelling");
-        bestellingen.remove(bestelling);
+        this.bestellingen.remove(bestelling);
         voegBestellingToe(new Bestelling(this.korting));
         notifyObservers();
     }
@@ -81,7 +81,7 @@ public class Winkel implements Subject {
 
     public Bestelling getActieveBestelling(){
         Bestelling bestelling = null;
-        for(Bestelling b: bestellingen){
+        for(Bestelling b: this.bestellingen){
             if(b.getState().equals(b.getActief())){
                 bestelling = b;
             }
@@ -91,7 +91,7 @@ public class Winkel implements Subject {
 
     public Bestelling getAfsluitBestelling(){
         Bestelling bestelling = null;
-        for(Bestelling b: bestellingen){
+        for(Bestelling b: this.bestellingen){
             if(b.getState().equals(b.getSluitAf())){
                 bestelling = b;
             }
@@ -109,28 +109,28 @@ public class Winkel implements Subject {
     }
 
     private void setAantalFromArtikels() {
-        for(Artikel a : db.getArtikels()){
+        for(Artikel a : this.db.getArtikels()){
             a.setAantal(1);
         }
     }
 
     private void setArtikelsFromOnHold(List<Artikel> artikels) {
-        artikelsFromOnHold = new ArrayList<>(artikels);
+        this.artikelsFromOnHold = new ArrayList<>(artikels);
     }
 
     public void setBestellingOffHold() {
         if( getBestellingOnHold() == null) throw new ModelException("Er is geen bestelling on hold");
-        bestellingen.remove(getActieveBestelling());
+        this.bestellingen.remove(getActieveBestelling());
         getBestellingOnHold().zetOffHold();
         getActieveBestelling().setArtikels(new ArrayList<>());
         setAantalFromArtikels();
-        getActieveBestelling().setArtikelsForKassa(artikelsFromOnHold);
+        getActieveBestelling().setArtikelsForKassa(this.artikelsFromOnHold);
         notifyObservers();
     }
 
     private Bestelling getBestellingOnHold(){
         Bestelling bestelling = null;
-        for(Bestelling b: bestellingen){
+        for(Bestelling b: this.bestellingen){
             if(b.getState().equals(b.getOnHold())){
                 bestelling = b;
             }
@@ -151,13 +151,13 @@ public class Winkel implements Subject {
     }
 
     public void addArtikelToBestelling(int artikelCode) {
-        Artikel a = db.getArtikel(artikelCode);
+        Artikel a = this.db.getArtikel(artikelCode);
         getActieveBestelling().voegArtikelToe(a);
         notifyObservers();
     }
 
     public void removeArtikelFromBestelling(int artikelCode) {
-        Artikel a = db.getArtikel(artikelCode);
+        Artikel a = this.db.getArtikel(artikelCode);
         if(getActieveBestelling() == null){
             getAfsluitBestelling().verwijderArtikel(a);
         }
@@ -180,7 +180,7 @@ public class Winkel implements Subject {
     }
 
     public List<Artikel> getArtikelsFromDb() {
-        return db.getArtikels();
+        return this.db.getArtikels();
     }
 
     public List<String> getKortingStrategyList(){
@@ -197,7 +197,7 @@ public class Winkel implements Subject {
 
     public String getTotaalStringFromBetaaldeBestellingen(){
         String result = "";
-        for(Bestelling bestelling: bestellingen){
+        for(Bestelling bestelling: this.bestellingen){
             if(bestelling.getState().equals(bestelling.getBetaald())){
                 result += bestelling.getTijdStip();
                 result += getTotaalString(bestelling);
@@ -208,7 +208,7 @@ public class Winkel implements Subject {
     }
 
     public void schrijfDbWegNaarFile(){
-        db.save();
+        this.db.save();
     }
 
     @Override
@@ -216,13 +216,13 @@ public class Winkel implements Subject {
         if (o == null) {
             throw new IllegalArgumentException("Ongeldige observer");
         }
-        observers.add(o);
+        this.observers.add(o);
     }
 
     @Override
     public void notifyObservers() {
-        for (int i = 0; i < observers.size(); i++) {
-            Observer observer = observers.get(i);
+        for (int i = 0; i < this.observers.size(); i++) {
+            Observer observer = this.observers.get(i);
             observer.update();
         }
     }

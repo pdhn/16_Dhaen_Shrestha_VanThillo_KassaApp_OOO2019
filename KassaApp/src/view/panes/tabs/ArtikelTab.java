@@ -19,6 +19,7 @@ public class ArtikelTab extends GridPane {
     private TableView table;
     private Label productsLabel;
     private Button refreshButton;
+    private VBox vBox;
 
     public ArtikelTab(ArtikelTabController artikelTabController) {
         this.artikelTabController = artikelTabController;
@@ -33,8 +34,8 @@ public class ArtikelTab extends GridPane {
         this.setVgap(5);
         this.setHgap(5);
 
-        productsLabel = new Label("Products");
-        this.add(productsLabel, 0, 0, 1, 1);
+        this.productsLabel = new Label("Products");
+        this.add(this.productsLabel, 0, 0, 1, 1);
 
         TableColumn<String, Artikel> column1 = new TableColumn<>("Artikel Code");
         column1.setCellValueFactory(new PropertyValueFactory<>("artikelCode"));
@@ -51,35 +52,35 @@ public class ArtikelTab extends GridPane {
         TableColumn<String, Artikel> column5 = new TableColumn<>("Voorraad");
         column5.setCellValueFactory(new PropertyValueFactory<>("voorraad"));
 
-        table = new TableView<>();
+        this.table = new TableView<>();
 
-        table.getColumns().add(column1);
-        table.getColumns().add(column2);
-        table.getColumns().add(column3);
-        table.getColumns().add(column4);
-        table.getColumns().add(column5);
+        this.table.getColumns().add(column1);
+        this.table.getColumns().add(column2);
+        this.table.getColumns().add(column3);
+        this.table.getColumns().add(column4);
+        this.table.getColumns().add(column5);
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        VBox vBox = new VBox(table);
+        vBox = new VBox(this.table);
 
         this.add(vBox, 0, 0);
 
-        for(Artikel a : artikelTabController.getArtikels()){
-            table.getItems().add(a);
+        for(Artikel a : this.artikelTabController.getArtikels()){
+            this.table.getItems().add(a);
         }
     }
 
     public void setRefresh() {
-        refreshButton = new Button("Refresh");
-        this.add(refreshButton,0,1);
-        refreshButton.setOnAction(event -> artikelTabController.refresh());
+        this.refreshButton = new Button("Refresh");
+        this.add(this.refreshButton,0,1);
+        this.refreshButton.setOnAction(event -> artikelTabController.refresh());
     }
 
     public void toonArtikels(List<Artikel> artikels) {
-        table.getItems().clear();
+        this.table.getItems().clear();
         for(Artikel a : artikels){
-            table.getItems().add(a);
+            this.table.getItems().add(a);
         }
     }
 }

@@ -26,14 +26,7 @@ public class ArtikelExcelLoadSave implements LoadSaveStrategy {
         try {
             ArrayList<ArrayList<String>> lijstObjectenVanXlsBestand = excelPlugin.read(new File(EXCEL_FILE_PATH));
 
-            List<Artikel> artikelen = new ArrayList<>();
-            for (ArrayList<String> as : lijstObjectenVanXlsBestand) {
-                Artikel artikel = new Artikel(Integer.parseInt(as.get(0)), as.get(1), as.get(2),
-                        Double.parseDouble(as.get(3)), Integer.parseInt(as.get(4)));
-
-                artikelen.add(artikel);
-            }
-            return artikelen;
+            return StringsToArtikels.getArtikelsFromStrings(lijstObjectenVanXlsBestand);
 
         } catch (IOException e) {
             throw new DBException("IO Exception ---> \n" + e.getStackTrace());

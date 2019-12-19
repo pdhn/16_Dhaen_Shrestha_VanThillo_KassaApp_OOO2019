@@ -25,11 +25,11 @@ public class KlantPane extends GridPane {
     }
 
     private void setLabels() {
-        label = new Label("Artikellijst");
-        this.add(label,0,0,1,1);
+        this.label = new Label("Artikellijst");
+        this.add(this.label,0,0,1,1);
 
-        totaal = new Label("Totaal:");
-        this.add(totaal,0,11,2,1);
+        this.totaal = new Label("Totaal:");
+        this.add(this.totaal,0,11,2,1);
     }
 
     private void setTableView() {
@@ -42,26 +42,26 @@ public class KlantPane extends GridPane {
         TableColumn<String, Artikel> column3 = new TableColumn<>("Prijs");
         column3.setCellValueFactory(new PropertyValueFactory<>("prijs"));
 
-        table = new TableView();
+        this.table = new TableView();
 
-        table.getColumns().add(column1);
-        table.getColumns().add(column2);
-        table.getColumns().add(column3);
+        this.table.getColumns().add(column1);
+        this.table.getColumns().add(column2);
+        this.table.getColumns().add(column3);
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        vBox = new VBox(table);
-        this.add(vBox, 0, 1,6,10);
+        this.vBox = new VBox(this.table);
+        this.add(this.vBox, 0, 1,6,10);
     }
 
     public void toonArtikels(List<Artikel> artikels){
-        table.getItems().clear();
+        this.table.getItems().clear();
         for(Artikel a: artikels){
-            table.getItems().add(a);
+            this.table.getItems().add(a);
         }
     }
 
     public void setTotaal(String string){
-        totaal.setText(string);
+        this.totaal.setText(string);
     }
 }

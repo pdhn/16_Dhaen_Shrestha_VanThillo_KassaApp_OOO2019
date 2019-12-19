@@ -21,19 +21,19 @@ public class Artikel {
 
 
     public int getArtikelCode() {
-        return artikelCode;
+        return this.artikelCode;
     }
 
     public String getOmschrijving() {
-        return omschrijving;
+        return this.omschrijving;
     }
 
     public String getArtikelGroep() {
-        return artikelGroep;
+        return this.artikelGroep;
     }
 
     public double getPrijs() {
-        return prijs;
+        return this.prijs;
     }
 
     public void setVoorraad(int voorraad){
@@ -41,19 +41,19 @@ public class Artikel {
     }
 
     public int getVoorraad() {
-        return voorraad;
+        return this.voorraad;
     }
 
-    public void verhoogAantal() { aantal++; }
+    public void verhoogAantal() { this.aantal++; }
 
-    public void verlaagAantal() { aantal--; }
+    public void verlaagAantal() { this.aantal--; }
 
     public void setAantal(int aantal){
         if(aantal < 1 ) throw new ModelException("Aantal mag niet kleiner zijn dan 1");
         this.aantal = aantal;
     }
 
-    public int getAantal(){ return aantal; }
+    public int getAantal(){ return this.aantal; }
 
     @Override
     public boolean equals(Object o) {

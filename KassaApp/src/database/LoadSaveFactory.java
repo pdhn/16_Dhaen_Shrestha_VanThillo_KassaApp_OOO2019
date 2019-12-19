@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class LoadSaveFactory {
     public static LoadSaveStrategy createLoadSave(){
-        LoadSaveStrategy loadSaveStrategy = null;
+        LoadSaveStrategy loadSaveStrategy;
         try{
             Properties config = new Properties();
             FileInputStream in = new FileInputStream("src\\bestanden\\config.properties");

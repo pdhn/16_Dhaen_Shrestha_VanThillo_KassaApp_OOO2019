@@ -10,7 +10,6 @@ import view.panes.KassaMainPane;
 public class KassaView {
 	private Stage stage = new Stage();
 	private Winkel winkel;
-	private static final String CSS_STYLESHEET = "src\\application\\application.css";
 		
 	public KassaView(){
 		winkel = Winkel.getInstance();
@@ -22,7 +21,6 @@ public class KassaView {
 		Group root = new Group();
 		Scene scene = new Scene(root, 750, 500);
 
-		//scene.getStylesheets().add(getClass().getResource(CSS_STYLESHEET).toExternalForm()); // Add css sheet
 		BorderPane borderPane = new KassaMainPane();
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());

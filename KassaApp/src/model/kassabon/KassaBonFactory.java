@@ -34,7 +34,6 @@ public class KassaBonFactory {
         } catch (Exception e){
             throw new ModelException("Kassabon kon niet aangemaakt worden");
         }
-
         return kassaBon;
     }
 }
