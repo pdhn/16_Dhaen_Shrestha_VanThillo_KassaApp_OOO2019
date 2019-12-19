@@ -1,6 +1,7 @@
 package view.panes.tabs;
 
 import controller.LogTabController;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -13,6 +14,10 @@ public class LogTab extends GridPane {
     private Button refresh;
 
     public LogTab(LogTabController logTabController){
+        this.setPadding(new Insets(5, 5, 5, 5));
+        this.setVgap(5);
+        this.setHgap(5);
+
         this.logTabController = logTabController;
         logTabController.setView(this);
 
@@ -22,7 +27,7 @@ public class LogTab extends GridPane {
 
         this.add(label,0,0);
         this.add(log,0,1);
-        this.add(refresh,1,0);
+        this.add(refresh,0,2);
 
         refresh.setOnAction(event ->  logTabController.getStringFromBetaaldeBestellingen());
     }

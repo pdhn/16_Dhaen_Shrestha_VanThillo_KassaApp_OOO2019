@@ -86,6 +86,8 @@ public class InstellingenTabController {
             FileOutputStream os = new FileOutputStream("src\\bestanden\\config.properties");
             config.store(os, "---No Comment---");
             os.close();
+
+            instellingenTab.setInfoLabel("De Tekst file zal bij de volgende sessie gebruikt worden.");
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -106,6 +108,8 @@ public class InstellingenTabController {
             FileOutputStream os = new FileOutputStream("src\\bestanden\\config.properties");
             config.store(os, "---No Comment---");
             os.close();
+
+            instellingenTab.setInfoLabel("De Excel file zal bij de volgende sessie gebruikt worden.");
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
