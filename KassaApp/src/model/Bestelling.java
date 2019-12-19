@@ -1,8 +1,5 @@
 package model;
 
-import model.kassabon.BodyKassaBon;
-import model.kassabon.KassaBon;
-import model.kassabon.KassaBonFactory;
 import model.korting.Korting;
 import model.states.*;
 
@@ -60,6 +57,10 @@ public class Bestelling {
         state.verwijderArtikel(a);
     }
 
+    public void setArtikels(List<Artikel> nieuweArtikels){
+        this.artikels = nieuweArtikels;
+    }
+
     public List<Artikel> getArtikelsForKassa(){
         List<Artikel> kassaArtikels = new ArrayList<>();
         for(Artikel a : artikels){
@@ -68,6 +69,18 @@ public class Bestelling {
             }
         }
         return kassaArtikels;
+    }
+
+    public void setArtikelsForKassa(List<Artikel> artikelsZonderAantallen) {
+        for(Artikel artikel : artikelsZonderAantallen){
+            if(this.artikels.contains(artikel)){
+                int plaats = artikels.indexOf(artikel);
+                artikels.get(plaats).verhoogAantal();
+            }
+            else{
+                artikels.add(artikel);
+            }
+        }
     }
 
     public List<Artikel> getArtikelsForKlant(){ return this.artikels; }
@@ -93,5 +106,4 @@ public class Bestelling {
     public double getBtw(){ return this.getTotaal()*BTW_PERCENTAGE; }
 
     public double getTotaalZonderBTW(){ return this.getTotaal()-this.getBtw(); }
-
 }

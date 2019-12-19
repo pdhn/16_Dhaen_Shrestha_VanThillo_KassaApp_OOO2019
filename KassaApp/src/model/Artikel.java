@@ -48,6 +48,11 @@ public class Artikel {
 
     public void verlaagAantal() { aantal--; }
 
+    public void setAantal(int aantal){
+        if(aantal < 1 ) throw new ModelException("Aantal mag niet kleiner zijn dan 1");
+        this.aantal = aantal;
+    }
+
     public int getAantal(){ return aantal; }
 
     @Override

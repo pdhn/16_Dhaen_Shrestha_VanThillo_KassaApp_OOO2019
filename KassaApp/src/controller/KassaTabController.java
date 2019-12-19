@@ -33,7 +33,7 @@ public class KassaTabController {
         catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Niet bestaande code " + e.getMessage());
+            alert.setHeaderText("Niet mogelijk om dit artikel op dit moment toe te voegen");
             alert.showAndWait();
         }
     }

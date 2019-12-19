@@ -18,7 +18,8 @@ public class Winkel implements Subject {
     private List<Observer> observers;
     private Korting korting;
 
-    private static final String FILE_PATH_PROPERTIES = "src\\bestanden\\config.properties";
+    private List<Artikel> artikelsFromOnHold;
+    private int onHoldCounter;
 
     private Winkel() {
         db = new ArtikelDB();
@@ -37,7 +38,12 @@ public class Winkel implements Subject {
 
     public void voegBestellingToe(Bestelling bestelling){
         if(bestelling == null) throw new ModelException("Geen geldige bestelling");
+        setAantalFromArtikels();
         bestellingen.add(bestelling);
+    }
+
+    public void sluitBestellingAf(){
+        getActieveBestelling().sluitAf();
     }
 
     public void annuleerBestelling(Bestelling bestelling){
@@ -76,10 +82,6 @@ public class Winkel implements Subject {
         return bestelling;
     }
 
-    public void sluitBestellingAf(){
-        getActieveBestelling().sluitAf();
-    }
-
     public Bestelling getAfsluitBestelling(){
         Bestelling bestelling = null;
         for(Bestelling b: bestellingen){
@@ -92,15 +94,29 @@ public class Winkel implements Subject {
 
     public void setBestellingOnHold() {
         if (getBestellingOnHold() != null) throw new ModelException("Er is al een bestelling on hold");
+        setArtikelsFromOnHold(getActieveBestelling().getArtikelsForKassa());
         getActieveBestelling().zetOnHold();
-        bestellingen.add(new Bestelling(this.korting));
+        voegBestellingToe(new Bestelling(this.korting));
         notifyObservers();
+    }
+
+    private void setAantalFromArtikels() {
+        for(Artikel a : db.getArtikels()){
+            a.setAantal(1);
+        }
+    }
+
+    private void setArtikelsFromOnHold(List<Artikel> artikels) {
+        artikelsFromOnHold = new ArrayList<>(artikels);
     }
 
     public void setBestellingOffHold() {
         if( getBestellingOnHold() == null) throw new ModelException("Er is geen bestelling on hold");
         bestellingen.remove(getActieveBestelling());
         getBestellingOnHold().zetOffHold();
+        getActieveBestelling().setArtikels(new ArrayList<>());
+        setAantalFromArtikels();
+        getActieveBestelling().setArtikelsForKassa(artikelsFromOnHold);
         notifyObservers();
     }
 
