@@ -3,6 +3,9 @@ package model.korting;
 import model.Bestelling;
 import model.ModelException;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class Groepkorting implements Korting {
     private int percentage, bedrag;
 

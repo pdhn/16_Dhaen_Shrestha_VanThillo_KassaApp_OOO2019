@@ -3,6 +3,9 @@ package model.kassabon;
 import model.Artikel;
 import model.Winkel;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class BodyKassaBon implements KassaBon {
 
     public BodyKassaBon(){ }

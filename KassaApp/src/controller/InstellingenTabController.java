@@ -9,6 +9,9 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class InstellingenTabController {
     private InstellingenTab instellingenTab;
 

@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author Pim Dhaen
+ */
 public class ArtikelExcelLoadSave implements LoadSaveStrategy {
     private ExcelPlugin excelPlugin;
 
@@ -20,6 +22,12 @@ public class ArtikelExcelLoadSave implements LoadSaveStrategy {
         excelPlugin = new ExcelPlugin();
     }
 
+    /**
+     * Leest artikelen uit een bestand m.b.v de ExelPlugin class in een lijst van strings en zet deze lijst om
+     * naar een lijst van artikels
+     *
+     * @return lijst van artikels
+     */
     @Override
     public List<Artikel> load() {
 

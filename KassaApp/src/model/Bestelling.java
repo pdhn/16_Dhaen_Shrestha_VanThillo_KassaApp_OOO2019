@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class Bestelling {
     private List<Artikel> artikels;
     private Korting korting;
@@ -61,6 +64,11 @@ public class Bestelling {
         this.artikels = nieuweArtikels;
     }
 
+    /**
+     * Geeft een lijst met dubbels terug
+     *
+     * @return lijst van artikelen
+     */
     public List<Artikel> getArtikelsForKassa(){
         List<Artikel> kassaArtikels = new ArrayList<>();
         for(Artikel a : artikels){
@@ -71,7 +79,13 @@ public class Bestelling {
         return kassaArtikels;
     }
 
-    public void setArtikelsForKassa(List<Artikel> artikelsZonderAantallen) {
+    /**
+     * Zet een lijst van artikelen zonder dubbels door bij elke dubbel het aantal van dat artikel met
+     * 1 te verhogen
+     *
+     * @param artikelsZonderAantallen
+     */
+    public void setArtikelsForKlant(List<Artikel> artikelsZonderAantallen) {
         for(Artikel artikel : artikelsZonderAantallen){
             if(this.artikels.contains(artikel)){
                 int plaats = artikels.indexOf(artikel);

@@ -4,6 +4,9 @@ import model.Artikel;
 
 import java.util.List;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class ArtikelDB {
     private ArtikelDBStrategy artikelDBStrategy;
 

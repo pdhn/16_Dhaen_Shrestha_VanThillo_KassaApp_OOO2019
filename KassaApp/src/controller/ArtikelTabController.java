@@ -6,6 +6,9 @@ import view.panes.tabs.ArtikelTab;
 
 import java.util.List;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class ArtikelTabController {
     private ArtikelTab artikelTab;
     private Winkel winkel;

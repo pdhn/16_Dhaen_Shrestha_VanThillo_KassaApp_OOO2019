@@ -3,7 +3,9 @@ package controller;
 import model.Winkel;
 import view.panes.tabs.LogTab;
 
-
+/**
+ * @author Sander Van Thillo
+ */
 public class LogTabController {
     private LogTab logTab;
     private Winkel winkel;

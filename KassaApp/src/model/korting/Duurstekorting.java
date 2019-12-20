@@ -4,6 +4,9 @@ import model.Artikel;
 import model.Bestelling;
 import model.ModelException;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class Duurstekorting implements Korting {
     private int percentage, bedrag;
 

@@ -2,6 +2,9 @@ package database;
 
 import java.util.List;
 
+/**
+ * @author Pim Dhaen
+ */
 public interface LoadSaveStrategy<Object> {
 
     List<Object> load();

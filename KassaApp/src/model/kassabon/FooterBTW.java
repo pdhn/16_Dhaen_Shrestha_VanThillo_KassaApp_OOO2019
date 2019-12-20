@@ -2,6 +2,9 @@ package model.kassabon;
 
 import model.Winkel;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class FooterBTW extends KassaBonDecorator {
 
     public FooterBTW(KassaBon kassaBon){

@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * @author Pim Dhaen
+ */
 public class Artikel {
 
     private int artikelCode;

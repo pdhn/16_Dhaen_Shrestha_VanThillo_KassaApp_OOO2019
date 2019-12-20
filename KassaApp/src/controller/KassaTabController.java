@@ -4,6 +4,9 @@ import javafx.scene.control.Alert;
 import model.Winkel;
 import view.panes.tabs.KassaTab;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class KassaTabController {
     private KassaTab kassaTab;
     private Winkel winkel;

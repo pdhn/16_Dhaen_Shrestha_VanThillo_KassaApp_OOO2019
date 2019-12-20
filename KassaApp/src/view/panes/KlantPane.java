@@ -9,6 +9,9 @@ import model.Artikel;
 
 import java.util.List;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class KlantPane extends GridPane {
     private TableView table;
     private Label label;

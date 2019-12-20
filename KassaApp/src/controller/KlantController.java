@@ -4,6 +4,9 @@ import model.Winkel;
 import view.panes.KlantPane;
 import model.Observer;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class KlantController implements Observer {
     private KlantPane klantPane;
     private Winkel winkel;

@@ -1,5 +1,8 @@
 package model.korting;
 
+/**
+ * @author Sander Van Thillo
+ */
 public enum KortingEnum {
     GEEN("Geen", "model.korting.Geenkorting"),
     GROEP("Groep", "model.korting.Groepkorting"),

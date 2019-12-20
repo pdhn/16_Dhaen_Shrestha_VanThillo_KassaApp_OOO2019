@@ -13,6 +13,9 @@ import view.panes.tabs.KassaTab;
 import view.panes.tabs.ArtikelTab;
 import view.panes.tabs.LogTab;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class KassaMainPane extends BorderPane {
     private TabPane tabPane;
     private Tab kassaTab, artikelTab, instellingenTab, logTab;

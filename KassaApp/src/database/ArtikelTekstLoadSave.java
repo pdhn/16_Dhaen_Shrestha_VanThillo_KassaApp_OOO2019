@@ -4,6 +4,9 @@ import model.Artikel;
 
 import java.util.*;
 
+/**
+ * @author Pim Dhaen
+ */
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
 
     protected static final String TXT_FILE_PATH = "src\\bestanden\\artikel.txt";
@@ -13,6 +16,12 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
 
     }
 
+    /**
+     * Gebruikt de load methode van TekstLoadSaveTemplate om een bestand in te lezen in een lijst van strings
+     * en zet deze lijst om naar een lijst van artikels m.b.v de StringsToArtikels klasse
+     *
+     * @return lijst van artikels
+     */
     @Override
     public List<Artikel> load() {
         ArrayList<ArrayList<String>> tempEntriesAsString = this.load(TXT_FILE_PATH, DELIMITER);
@@ -20,6 +29,12 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
         return StringsToArtikels.getArtikelsFromStrings(tempEntriesAsString);
     }
 
+    /**
+     * Zet een lijst van artikels om in een lijst van strings en gebruikt de save methode van
+     * TekstLoadSaveTemplate om ze weg te schrijven.
+     *
+     * @param lijstObjecten
+     */
     @Override
     public void save(List lijstObjecten) {
         // Convert to list of list of strings to write to file

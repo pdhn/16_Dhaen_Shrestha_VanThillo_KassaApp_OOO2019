@@ -2,6 +2,9 @@ package model.kassabon;
 
 import model.Winkel;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class HeaderAlgemeneBoodschap extends KassaBonDecorator {
     private String boodschap;
 

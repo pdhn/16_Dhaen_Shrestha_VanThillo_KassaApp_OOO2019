@@ -5,6 +5,9 @@ import model.ModelException;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class KassaBonFactory {
     public static KassaBon createKassaBon(){
         KassaBon kassaBon = new BodyKassaBon();

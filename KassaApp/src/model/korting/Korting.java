@@ -2,6 +2,9 @@ package model.korting;
 
 import model.Bestelling;
 
+/**
+ * @author Sander Van Thillo
+ */
 public interface Korting {
     void setPercentage(int percentage);
     void setBedrag(int bedrag);

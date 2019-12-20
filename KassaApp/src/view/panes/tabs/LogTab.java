@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class LogTab extends GridPane {
     private LogTabController logTabController;
     private Label label;

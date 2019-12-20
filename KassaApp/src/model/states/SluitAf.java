@@ -5,6 +5,9 @@ import model.Bestelling;
 import model.BestellingHelper;
 import model.ModelException;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class SluitAf extends State {
 
     public SluitAf(Bestelling bestelling){

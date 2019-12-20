@@ -4,6 +4,9 @@ import model.Artikel;
 
 import java.util.*;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class ArtikelDBInMemory implements ArtikelDBStrategy {
     private Map<Integer,Artikel> artikelen = new HashMap<>();
     private LoadSaveStrategy loadSaveStrategy;

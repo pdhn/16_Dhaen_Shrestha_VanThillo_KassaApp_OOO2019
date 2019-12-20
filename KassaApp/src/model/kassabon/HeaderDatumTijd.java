@@ -4,6 +4,9 @@ import model.Winkel;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class HeaderDatumTijd extends KassaBonDecorator {
 
     public HeaderDatumTijd(KassaBon kassaBon){

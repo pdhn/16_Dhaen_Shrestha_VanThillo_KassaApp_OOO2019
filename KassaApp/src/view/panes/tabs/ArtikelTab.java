@@ -13,7 +13,9 @@ import model.Artikel;
 
 import java.util.List;
 
-
+/**
+ * @author Pim Dhaen, Sander Van Thillo
+ */
 public class ArtikelTab extends GridPane {
     private ArtikelTabController artikelTabController;
     private TableView table;

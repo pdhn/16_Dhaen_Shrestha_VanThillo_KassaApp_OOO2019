@@ -11,7 +11,9 @@ import model.Artikel;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * @author Sander Van Thillo
+ */
 public class KassaTab extends GridPane {
     private KassaTabController kassaTabController;
     private VBox vBox;

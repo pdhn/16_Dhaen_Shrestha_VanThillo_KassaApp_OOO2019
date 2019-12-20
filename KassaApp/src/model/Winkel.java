@@ -11,6 +11,9 @@ import model.korting.KortingFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class Winkel implements Subject {
     private static Winkel uniqueInstance;
     private ArtikelDB db;
@@ -54,6 +57,14 @@ public class Winkel implements Subject {
         notifyObservers();
     }
 
+    /**
+     * De voorraad in de database wordt aangepast
+     * Een kassabon wordt gemaakt en uitgeprint
+     * De bestelling wordt op betaald gezet en er wordt een nieuwe bestelling aangemaakt
+     * Er wordt gecontroleerd of er een bestelling on hold staat en of die al drie verkopen on hold staat
+     * Indien die al drie verkopen on hold staat wordt deze verwijderd
+     * De observers krijgen een melding om te updaten
+     */
     public void betaalBestelling(){
         pasVoorraadAan();
         KassaBon kassaBon = KassaBonFactory.createKassaBon();
@@ -99,6 +110,14 @@ public class Winkel implements Subject {
         return bestelling;
     }
 
+    /**
+     * Slaagt de lijst van artikels van de bestelling op in een aparte lijst
+     * Zet de actieve bestelling on hold
+     * Zet de onHoldCounter op 3
+     * Voegt een nieuwe bestelling toe aan de lijst van bestellingen
+     *
+     * @exception throws een exception als er al een bestelling de onHold state heeft
+     */
     public void setBestellingOnHold() {
         if (getBestellingOnHold() != null) throw new ModelException("Er is al een bestelling on hold");
         setArtikelsFromOnHold(getActieveBestelling().getArtikelsForKassa());
@@ -118,13 +137,23 @@ public class Winkel implements Subject {
         this.artikelsFromOnHold = new ArrayList<>(artikels);
     }
 
+    /**
+     * Verwijdert de actieve bestelling
+     * Zet de de onHold bestelling off hold door de state van de bestelling op actief te zetten
+     * Maakt de lijst van artikelen van de actieve bestelling leeg
+     * Zet de aantallen van de artikels op 1
+     * Herberekent de lijst van artikelen van de actieve bestelling met behulp van de onHold lijst
+     *
+     * @exception throws een exception indien er geen bestelling is met een onHold state
+     */
     public void setBestellingOffHold() {
         if( getBestellingOnHold() == null) throw new ModelException("Er is geen bestelling on hold");
         this.bestellingen.remove(getActieveBestelling());
         getBestellingOnHold().zetOffHold();
+        this.onHoldCounter = 0;
         getActieveBestelling().setArtikels(new ArrayList<>());
         setAantalFromArtikels();
-        getActieveBestelling().setArtikelsForKassa(this.artikelsFromOnHold);
+        getActieveBestelling().setArtikelsForKlant(this.artikelsFromOnHold);
         notifyObservers();
     }
 

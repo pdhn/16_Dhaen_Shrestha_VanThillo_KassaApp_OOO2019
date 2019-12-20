@@ -1,5 +1,8 @@
 package model.korting;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class KortingFactory {
     public static Korting createKorting(String type){
         KortingEnum kortingEnum = KortingEnum.valueOf(type);

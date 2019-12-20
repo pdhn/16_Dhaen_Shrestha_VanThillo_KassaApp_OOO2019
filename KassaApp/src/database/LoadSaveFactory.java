@@ -3,6 +3,9 @@ package database;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class LoadSaveFactory {
     public static LoadSaveStrategy createLoadSave(){
         LoadSaveStrategy loadSaveStrategy;

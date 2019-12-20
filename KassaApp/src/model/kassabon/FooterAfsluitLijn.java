@@ -1,8 +1,10 @@
 package model.kassabon;
 
-
 import model.Winkel;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class FooterAfsluitLijn extends KassaBonDecorator {
     private String boodschap;
 

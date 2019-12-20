@@ -6,6 +6,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author Sander Van Thillo
+ */
 public class InstellingenTab extends GridPane {
     private InstellingenTabController instellingenTabController;
     private ComboBox korting;
