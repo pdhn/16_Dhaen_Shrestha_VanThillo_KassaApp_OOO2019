@@ -5,7 +5,7 @@ import model.Artikel;
 import java.util.*;
 
 /**
- * @author Pim Dhaen
+ * @author Pim Dhaen & Roshan Shrestha
  */
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
 

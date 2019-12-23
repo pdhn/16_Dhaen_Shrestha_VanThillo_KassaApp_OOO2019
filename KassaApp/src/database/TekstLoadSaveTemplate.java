@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * @author Pim Dhaen
+ * @author Pim Dhaen & Roshan Shrestha
  */
 public abstract class TekstLoadSaveTemplate implements LoadSaveStrategy {
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Sander Van Thillo
+ * @author Sander Van Thillo & Roshan Shrestha
  */
 public class Bestelling {
     private List<Artikel> artikels;

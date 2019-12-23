@@ -1,7 +1,7 @@
 package model;
 
 /**
- * @author Pim Dhaen
+ * @author Pim Dhaen & Roshan Shrestha
  */
 public class Artikel {
 

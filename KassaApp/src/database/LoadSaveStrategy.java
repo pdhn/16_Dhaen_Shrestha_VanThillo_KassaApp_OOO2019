@@ -3,7 +3,7 @@ package database;
 import java.util.List;
 
 /**
- * @author Pim Dhaen
+ * @author Pim Dhaen & Roshan Shrestha
  */
 public interface LoadSaveStrategy<Object> {
 

@@ -3,7 +3,7 @@ package model.kassabon;
 import model.Winkel;
 
 /**
- * @author Sander Van Thillo
+ * @author Roshan Shrestha
  */
 public abstract class KassaBonDecorator implements KassaBon {
     private KassaBon kassaBon;

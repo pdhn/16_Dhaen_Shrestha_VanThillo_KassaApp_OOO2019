@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Pim Dhaen
+ * @author Pim Dhaen & Roshan Shrestha
  */
 public class ArtikelExcelLoadSave implements LoadSaveStrategy {
     private ExcelPlugin excelPlugin;
