@@ -1,7 +1,7 @@
 package model.korting;
 
 /**
- * @author Sander Van Thillo
+ * @author Pim Dhaen
  */
 public enum KortingEnum {
     GEEN("Geen", "model.korting.Geenkorting"),

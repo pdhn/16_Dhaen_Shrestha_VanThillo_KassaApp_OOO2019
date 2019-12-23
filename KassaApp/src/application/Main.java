@@ -5,7 +5,10 @@ import javafx.stage.Stage;
 import view.KassaView;
 import view.KlantView;
 
-
+/***
+ *
+ * @author 16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019
+ */
 public class Main extends Application {
 
 	@Override

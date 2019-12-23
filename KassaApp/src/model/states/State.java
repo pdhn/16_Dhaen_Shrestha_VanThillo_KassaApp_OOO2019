@@ -5,7 +5,7 @@ import model.Bestelling;
 import model.ModelException;
 
 /**
- * @author Sander Van Thillo
+ * @author 16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019
  */
 public class State {
     Bestelling bestelling;

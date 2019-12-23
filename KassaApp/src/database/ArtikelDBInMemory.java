@@ -5,7 +5,7 @@ import model.Artikel;
 import java.util.*;
 
 /**
- * @author Sander Van Thillo
+ * @author 16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019
  */
 public class ArtikelDBInMemory implements ArtikelDBStrategy {
     private Map<Integer,Artikel> artikelen = new HashMap<>();

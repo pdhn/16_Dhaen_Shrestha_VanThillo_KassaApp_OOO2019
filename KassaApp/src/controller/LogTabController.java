@@ -4,7 +4,7 @@ import model.Winkel;
 import view.panes.tabs.LogTab;
 
 /**
- * @author Sander Van Thillo
+ * @author Roshan Shrestha
  */
 public class LogTabController {
     private LogTab logTab;

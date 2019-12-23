@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * @author Sander Van Thillo
+ * @author Pim Dhaen & Roshan Shrestha
  */
 public class InstellingenTabController {
     private InstellingenTab instellingenTab;

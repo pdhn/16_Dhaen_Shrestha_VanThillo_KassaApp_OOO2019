@@ -14,7 +14,7 @@ import view.panes.tabs.ArtikelTab;
 import view.panes.tabs.LogTab;
 
 /**
- * @author Sander Van Thillo
+ * @author 16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019
  */
 public class KassaMainPane extends BorderPane {
     private TabPane tabPane;

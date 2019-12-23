@@ -4,7 +4,7 @@ import model.Bestelling;
 import model.ModelException;
 
 /**
- * @author Sander Van Thillo
+ * @author Roshan Shrestha
  */
 public class Groepkorting implements Korting {
     private int percentage, bedrag;

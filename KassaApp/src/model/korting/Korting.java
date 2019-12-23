@@ -3,7 +3,7 @@ package model.korting;
 import model.Bestelling;
 
 /**
- * @author Sander Van Thillo
+ * @author Pim Dhaen
  */
 public interface Korting {
     void setPercentage(int percentage);

@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 /**
- * @author Sander Van Thillo
+ * @author 16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019
  */
 public class LoadSaveFactory {
     public static LoadSaveStrategy createLoadSave(){

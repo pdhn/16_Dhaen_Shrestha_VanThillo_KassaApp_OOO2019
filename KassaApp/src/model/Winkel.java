@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Sander Van Thillo
+ * @author 16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019
  */
 public class Winkel implements Subject {
     private static Winkel uniqueInstance;

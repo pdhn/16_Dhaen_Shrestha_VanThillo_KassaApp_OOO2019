@@ -7,7 +7,7 @@ import view.panes.tabs.ArtikelTab;
 import java.util.List;
 
 /**
- * @author Sander Van Thillo
+ * @author 16_Dhaen_Shrestha_VanThillo_KassaApp_OOO2019
  */
 public class ArtikelTabController {
     private ArtikelTab artikelTab;
